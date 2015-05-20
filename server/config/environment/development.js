@@ -5,8 +5,8 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://ponto:ponto@ds031872.mongolab.com:31872/ponto-dev'
+    uri: 'mongodb://localhost/ponto-dev'
   },
 
-  seedDB: false
+  seedDB: true
 };
