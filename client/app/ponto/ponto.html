@@ -1,0 +1,122 @@
+<div class="container">
+	<div class="row row-space">
+		<div class="col-xs-12">
+			<button class="btn btn-primary pull-right" ng-click="showModalPonto()">Registrar Ponto</button>
+		</div>
+	</div>
+
+	<div class="row row-space">
+		<div class="col-xs-12">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" ng-click="anterior()">
+					<span class="glyphicon glyphicon-arrow-left"></span>
+				</button>
+				<button type="button" class="btn btn-default" ng-model="mes" data-min-view="1" bs-datepicker>
+					{{ mes | date: 'MMMM yyyy' }}
+				</button>
+				<button type="button" class="btn btn-default" ng-click="proximo()">
+					<span class="glyphicon glyphicon-arrow-right"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="row row-space">
+		<div class="col-xs-12">
+			<div class="table-responsive">
+				<table class="table table-striped" ng-show="possuiRegistros()">
+					<thead>
+						<tr>
+							<th>Dia</th>
+							<th>Entrada / Saída</th>
+							<th>Trabalhadas</th>
+							<th>Extra</th>
+							<th>Faltantes</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="ponto in pontos">
+							<td>{{ ponto.data | date: 'dd' }}</td>
+							<td>
+								{{ ponto.entrada1 | date: 'HH:mm' }} - {{ ponto.saida1 | date: 'HH:mm' }}<br>
+								{{ ponto.entrada2 | date: 'HH:mm' }} - {{ ponto.saida2 | date: 'HH:mm' }}
+							</td>
+							<td>{{ ponto.horasTrabalhadas | time }}</td>
+							<td>{{ ponto.horasExtras | time }}</td>
+							<td>{{ ponto.horasFaltantes | time }}</td>
+							<td>
+								<div class="btn-group">
+									<button class="btn btn-default" ng-click="showModalPonto(ponto)">
+										<span class="glyphicon glyphicon-pencil"></span>
+									</button>
+									<button class="btn btn-default" ng-click="showModalRemover(ponto)">
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="alert alert-info" ng-hide="possuiRegistros()">
+				<p>Não foi encontrado nenhum registro de ponto para este mês.</p>
+			</div>
+
+			<div class="row">
+				<!-- Total horas trabalhadas -->
+				<div class="col-sm-6 col-md-3">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-time"></span>
+							<strong>Trabalhadas (mês)</strong>
+						</div>
+						<div class="panel-body text-right">
+							<span class="lead text-muted">{{ total.horasTrabalhadas | time }}</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Total horas extras -->
+				<div class="col-sm-6 col-md-3">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-time"></span>
+							<strong>Extras (mês)</strong>
+						</div>
+						<div class="panel-body text-right">
+							<span class="lead text-success">{{ total.horasExtras | time }}</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Total horas faltantes -->
+				<div class="col-sm-6 col-md-3">
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-time"></span>
+							<strong>Faltantes (mês)</strong>
+						</div>
+						<div class="panel-body text-right">
+							<span class="lead text-danger">{{ total.horasFaltantes | time }}</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Total horas banco -->
+				<div class="col-sm-6 col-md-3">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-time"></span>
+							<strong>Banco (total)</strong>
+						</div>
+						<div class="panel-body text-right">
+							<span class="lead text-primary">{{ banco.horas | time }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

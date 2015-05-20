@@ -1,0 +1,18 @@
+<div class="aside" tabindex="-1" role="dialog">
+	<div class="aside-dialog">
+		<div class="aside-content">
+			<div class="aside-header">
+				<button type="button" class="close" ng-click="$hide()">&times;</button>
+				<h4 class="aside-title">Menu</h4>
+			</div>
+			<div class="aside-body">
+				<ul class="nav side-menu">
+					<li><a ng-href="/" ng-click="$hide()">Home</a></li>
+					<li><a ng-href="/pontos" ng-if="isLoggedIn()" ng-click="$hide()">Registro de Pontos</a></li>
+					<li><a ng-href="/admin" ng-if="isAdmin()" ng-click="$hide()">Usuários</a></li>
+					<li><a ng-href="javascript:void(0)" ng-if="isLoggedIn()" ng-click="logout($hide)">Sair</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

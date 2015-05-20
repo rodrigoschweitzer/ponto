@@ -1,0 +1,49 @@
+<div class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="$hide()">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span>
+				</button>
+				<h4 class="modal-title">Registro de Ponto</h4>
+			</div>
+			<div class="modal-body">
+				<form name="formPonto" novalidate>
+					<!-- Data -->
+					<div class="row">
+						<div class="form-group col-sm-3" ng-class="{'has-error': formPonto.data.$invalid}">
+							<label for="data" class="control-label">Data</label>
+							<input type="text" id="data" name="data" class="form-control" ng-model="ponto.data" ng-required="true" bs-datepicker />
+						</div>
+					</div>
+
+					<div class="row">
+						<!-- Entrada 1 / Saída 1 -->
+						<div class="form-group col-sm-3 col-xs-6" ng-class="{'has-error': formPonto.entrada1.$invalid}">
+							<label for="entrada1" class="control-label">Entrada 1</label>
+							<input type="text" id="entrada1" name="entrada1" class="form-control" ng-model="ponto.entrada1" bs-timepicker />
+						</div>
+						<div class="form-group col-sm-3 col-xs-6" ng-class="{'has-error': formPonto.saida1.$invalid}">
+							<label for="saida1" class="control-label">Saída 1</label>
+							<input type="text" id="saida1" class="form-control" ng-model="ponto.saida1" bs-timepicker />
+						</div>
+
+						<!-- Entrada 2 / Saída 2 -->
+						<div class="form-group col-sm-3 col-xs-6" ng-class="{'has-error': formPonto.entrada2.$invalid}">
+							<label for="entrada2" class="control-label">Entrada 2</label>
+							<input type="text" id="entrada2" class="form-control" ng-model="ponto.entrada2" bs-timepicker />
+						</div>
+						<div class="form-group col-sm-3 col-xs-6" ng-class="{'has-error': formPonto.saida2.$invalid}">
+							<label for="saida2" class="control-label">Saída 2</label>
+							<input type="text" id="saida2" class="form-control" ng-model="ponto.saida2" bs-timepicker />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="salvar($hide)" ng-disabled="formPonto.$invalid">Salvar</button>
+				<button type="button" class="btn btn-default" ng-click="$hide()">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
