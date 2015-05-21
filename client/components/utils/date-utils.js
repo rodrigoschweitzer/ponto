@@ -1,3 +1,4 @@
+'use strict';
 Date.prototype.nextMonth = function() {
 	this.setMonth(this.getMonth() + 1);
 	return this;

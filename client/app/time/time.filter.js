@@ -7,9 +7,9 @@ angular.module('pontoApp')
 				minutos = Math.abs(tempo) % 60,
 				horaNegativa = '';
 
-			if (tempo < 0) horaNegativa = '-';
-			if (horas < 10) horas = '0' + horas;
-			if (minutos < 10) minutos = '0' + minutos;
+			if (tempo < 0) { horaNegativa = '-'; }
+			if (horas < 10) { horas = '0' + horas; }
+			if (minutos < 10) { minutos = '0' + minutos; }
 
 			return horaNegativa + horas + ':' + minutos;
 		}

@@ -57,5 +57,5 @@ angular.module('pontoApp')
 			banco: function() {
 				return $resource('/api/pontos/banco').get().$promise;
 			}
-		}
+		};
 	});

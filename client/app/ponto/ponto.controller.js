@@ -13,23 +13,23 @@ angular.module('pontoApp')
 				animation: 'am-fade-and-scale',
 				show: false
 			});
-		};
+		}
 
 		function _beforeSave() {
 			_setDate($scope.ponto.entrada1);
 			_setDate($scope.ponto.saida1);
 			_setDate($scope.ponto.entrada2);
 			_setDate($scope.ponto.saida2);
-		};
+		}
 
 		function _setDate(registro) {
-			if (!registro) return
+			if (!registro) { return; }
 
 			var data = $scope.ponto.data;
 			registro.setDate(data.getDate());
 			registro.setMonth(data.getMonth());
 			registro.setFullYear(data.getFullYear());
-		};
+		}
 
 		$scope.$watch('mes', function(newValue, oldValue) {
 			if (newValue !== oldValue) {
@@ -80,7 +80,7 @@ angular.module('pontoApp')
 		$scope.salvar = function(fecharModal) {
 			_beforeSave();
 
-			PontoService.salvar($scope.ponto).then(function(ponto) {
+			PontoService.salvar($scope.ponto).then(function() {
 				$scope.listar();
 				$scope.getHorasBanco();
 				fecharModal();
@@ -93,10 +93,10 @@ angular.module('pontoApp')
 			PontoService.listar(mes).then(function(pontos) {
 				angular.forEach(pontos, function (ponto) {
 					ponto.data = new Date(ponto.data);
-					if (ponto.entrada1) ponto.entrada1 = new Date(ponto.entrada1);
-					if (ponto.saida1) ponto.saida1 = new Date(ponto.saida1);
-					if (ponto.entrada2) ponto.entrada2 = new Date(ponto.entrada2);
-					if (ponto.saida2) ponto.saida2 = new Date(ponto.saida2);
+					if (ponto.entrada1) { ponto.entrada1 = new Date(ponto.entrada1); }
+					if (ponto.saida1) { ponto.saida1 = new Date(ponto.saida1); }
+					if (ponto.entrada2) { ponto.entrada2 = new Date(ponto.entrada2); }
+					if (ponto.saida2) { ponto.saida2 = new Date(ponto.saida2); }
 				});
 
 				$scope.pontos = pontos;
