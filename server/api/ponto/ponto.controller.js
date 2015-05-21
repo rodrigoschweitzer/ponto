@@ -5,12 +5,16 @@ var Ponto = require('./ponto.model'),
 	_ = require('lodash');
 
 exports.banco = function(req, res) {
-	Ponto.aggregate()
-		.group({
-			_id: null,
-			horasExtras: { $sum: '$horasExtras' },
-			horasFaltantes: { $sum: '$horasFaltantes' }
-		})
+	Ponto.aggregate([{
+				$match: { user: req.user._id }
+			}, {
+				$group: {
+					_id: null,
+					horasExtras: { $sum: '$horasExtras' },
+					horasFaltantes: { $sum: '$horasFaltantes' }
+				}
+			}
+		])
 		.exec(function(err, dados) {
 			if (err) { return handleError(res, err); }
 
@@ -28,7 +32,8 @@ exports.total = function(req, res) {
 				data: {
 					$gte: new Date(req.query.inicio),
 					$lte: new Date(req.query.fim)
-				}
+				},
+				user: req.user._id
 			}
 		}, {
 			$group: {
@@ -50,7 +55,8 @@ exports.index = function(req, res) {
 			data: {
 				'$gte': req.query.inicio,
 				'$lte': req.query.fim
-			}
+			},
+			user: req.user._id
 		})
 		.sort('-data')
 		.exec(function (err, pontos) {
@@ -72,7 +78,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
 	var ponto = req.body;
 
-	_.merge(ponto, calcularMinutos(ponto));
+	_.merge(ponto, calcularMinutos(ponto), { user: req.user });
 
 	Ponto.create(ponto, function(err, ponto) {
 		if (err) { return handleError(res, err); }
