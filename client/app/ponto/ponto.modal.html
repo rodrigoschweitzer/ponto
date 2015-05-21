@@ -44,7 +44,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" ng-click="salvar($hide)" ng-disabled="formPonto.$invalid">Salvar</button>
+					<button type="submit" class="btn btn-primary" ng-click="salvar($hide)" ng-disabled="formPonto.$invalid || botaoSalvarDesabilitado">{{ labelBotaoSalvar }}</button>
 					<button type="button" class="btn btn-default" ng-click="$hide()">Cancelar</button>
 				</div>
 			</form>

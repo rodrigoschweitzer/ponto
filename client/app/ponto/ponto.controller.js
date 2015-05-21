@@ -31,6 +31,20 @@ angular.module('pontoApp')
 			registro.setFullYear(data.getFullYear());
 		}
 
+		function _tratarEstadoBotaoSalvar() {
+			var label = '';
+
+			$scope.botaoSalvarDesabilitado = !$scope.botaoSalvarDesabilitado;
+
+			if ($scope.botaoSalvarDesabilitado) {
+				label = 'Salvando...'
+			} else {
+				label = 'Salvar';
+			}
+
+			$scope.labelBotaoSalvar = label;
+		}
+
 		$scope.$watch('mes', function(newValue, oldValue) {
 			if (newValue !== oldValue) {
 				$scope.listar();
@@ -42,6 +56,8 @@ angular.module('pontoApp')
 		$scope.pontos = [];
 		$scope.total = {};
 		$scope.banco = {};
+		$scope.labelBotaoSalvar = 'Salvar';
+		$scope.botaoSalvarDesabilitado = false;
 
 		$scope.anterior = function() {
 			$scope.mes.prevMonth();
@@ -78,12 +94,14 @@ angular.module('pontoApp')
 		};
 
 		$scope.salvar = function(fecharModal) {
+			_tratarEstadoBotaoSalvar();
 			_beforeSave();
 
 			PontoService.salvar($scope.ponto).then(function() {
 				$scope.listar();
 				$scope.getHorasBanco();
 				fecharModal();
+				_tratarEstadoBotaoSalvar();
 			});
 		};
 
