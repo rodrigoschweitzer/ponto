@@ -45,7 +45,7 @@ exports.total = function(req, res) {
 		}
 	]).exec(function(err, dados) {
 		if (err) { return handleError(res, err); }
-		return res.json(200, dados);
+		return res.json(200, dados[0]);
 	});
 };
 

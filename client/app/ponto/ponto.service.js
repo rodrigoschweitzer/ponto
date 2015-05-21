@@ -16,18 +16,16 @@ angular.module('pontoApp')
 			},
 
 			get: function(id) {
-				return Service.get({
-					id: id
-				}).$promise;
+				return Service.get({ id: id }).$promise;
 			},
 
 			salvar: function(ponto) {
 				if (ponto && !ponto._id) {
 					ponto.data.resetTime();
 					return ponto.$save();
-				} else {
-					return ponto.$update();
 				}
+
+				return ponto.$update();
 			},
 
 			remover: function(ponto) {
@@ -44,17 +42,17 @@ angular.module('pontoApp')
 				}).$promise;
 			},
 
-			total: function(mes) {
+			totalHoras: function(mes) {
 				var inicio = mes,
 					fim = angular.copy(mes);
 
-				return $resource('/api/pontos/total').query({
+				return $resource('/api/pontos/total').get({
 					inicio: inicio.firstDay().resetTime(),
 					fim: fim.lastDay().maxTime()
 				}).$promise;
 			},
 
-			banco: function() {
+			horasBanco: function() {
 				return $resource('/api/pontos/banco').get().$promise;
 			}
 		};

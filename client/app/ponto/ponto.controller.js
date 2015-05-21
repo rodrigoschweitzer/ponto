@@ -55,7 +55,7 @@ angular.module('pontoApp')
 		$scope.ponto = {};
 		$scope.pontos = [];
 		$scope.total = {};
-		$scope.banco = {};
+		$scope.horasBanco = 0;
 		$scope.labelBotaoSalvar = 'Salvar';
 		$scope.botaoSalvarDesabilitado = false;
 
@@ -129,14 +129,14 @@ angular.module('pontoApp')
 
 		$scope.getTotal = function() {
 			var mes = angular.copy($scope.mes);
-			PontoService.total(mes).then(function(total) {
-				$scope.total = total[0];
+			PontoService.totalHoras(mes).then(function(total) {
+				$scope.total = total;
 			});
 		};
 
 		$scope.getHorasBanco = function() {
-			PontoService.banco().then(function(banco) {
-				$scope.banco = banco;
+			PontoService.horasBanco().then(function(horasBanco) {
+				$scope.horasBanco = horasBanco.horas;
 			});
 		};
 
