@@ -37,7 +37,9 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="ponto in pontos">
-							<td>{{ ponto.data | date: 'dd' }}</td>
+							<td>
+								{{ ponto.data | date: 'dd' }} <span class="hidden-xs">{{ ponto.data | date: 'EEE' }}</span>
+							</td>
 							<td>
 								{{ ponto.entrada1 | date: 'HH:mm' }} - {{ ponto.saida1 | date: 'HH:mm' }}<br>
 								{{ ponto.entrada2 | date: 'HH:mm' }} - {{ ponto.saida2 | date: 'HH:mm' }}
