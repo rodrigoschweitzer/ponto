@@ -11,7 +11,7 @@ angular.module('pontoApp')
 				password: $scope.user.password
 			})
 			.then(function() {
-				$location.path('/');
+				$location.path('/pontos');
 			})
 			.catch(function(err) {
 				$scope.mensagem = err.message;
