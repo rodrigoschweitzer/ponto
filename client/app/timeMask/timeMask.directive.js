@@ -12,7 +12,7 @@ angular.module('pontoApp')
 				}
 
 				var _formartTime = function (value) {
-					if (!value) { return '' };
+					if (!value) { return ''; }
 
 					// Remove todos os caracteres que não forem números
 					var time = value.replace(/\D/g, '');
@@ -25,7 +25,7 @@ angular.module('pontoApp')
 				};
 
 				element.bind('keyup', function (event) {
-					if (/(16|17|18|20|35|36|37|38|39|40|45)/.test(event.keyCode)) return;
+					if (/(16|17|18|20|35|36|37|38|39|40|45)/.test(event.keyCode)) { return; }
 
 					ctrls.$setViewValue(_formartTime(ctrls.$viewValue));
 					ctrls.$render();
@@ -41,6 +41,8 @@ angular.module('pontoApp')
 					var data = new Date();
 					data.setHours(value.substring(0, 2));
 					data.setMinutes(value.substring(3, 5));
+					data.setSeconds(0);
+					data.setMilliseconds(0);
 					ctrls.$setValidity('date', true);
 					return data;
 				});

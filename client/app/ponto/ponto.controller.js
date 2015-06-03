@@ -16,13 +16,13 @@ angular.module('pontoApp')
 		}
 
 		function _beforeSave() {
-			_setDate($scope.ponto.entrada1);
-			_setDate($scope.ponto.saida1);
-			_setDate($scope.ponto.entrada2);
-			_setDate($scope.ponto.saida2);
+			_setDateOnRegister($scope.ponto.entrada1);
+			_setDateOnRegister($scope.ponto.saida1);
+			_setDateOnRegister($scope.ponto.entrada2);
+			_setDateOnRegister($scope.ponto.saida2);
 		}
 
-		function _setDate(registro) {
+		function _setDateOnRegister(registro) {
 			if (!registro) { return; }
 
 			var data = $scope.ponto.data;
@@ -37,7 +37,7 @@ angular.module('pontoApp')
 			$scope.botaoSalvarDesabilitado = !$scope.botaoSalvarDesabilitado;
 
 			if ($scope.botaoSalvarDesabilitado) {
-				label = 'Salvando...'
+				label = 'Salvando...';
 			} else {
 				label = 'Salvar';
 			}
