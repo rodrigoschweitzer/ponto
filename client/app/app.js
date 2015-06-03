@@ -6,7 +6,8 @@ angular.module('pontoApp', [
 	'ngSanitize',
 	'ngAnimate',
 	'ui.router',
-	'mgcrea.ngStrap'
+	'mgcrea.ngStrap',
+	'angular-loading-bar'
 ])
 	.config(function ($urlRouterProvider, $locationProvider, $httpProvider, $datepickerProvider, $timepickerProvider) {
 		angular.extend($datepickerProvider.defaults, {
