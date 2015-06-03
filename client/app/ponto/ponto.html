@@ -48,14 +48,12 @@
 							<td>{{ ponto.horasExtras | time }}</td>
 							<td>{{ ponto.horasFaltantes | time }}</td>
 							<td>
-								<div class="btn-group">
-									<button class="btn btn-default" ng-click="showModalPonto(ponto)">
-										<span class="glyphicon glyphicon-pencil"></span>
-									</button>
-									<button class="btn btn-default" ng-click="showModalRemover(ponto)">
-										<span class="glyphicon glyphicon-trash"></span>
-									</button>
-								</div>
+								<button class="btn btn-default" ng-click="showModalPonto(ponto)">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</button>
+								<button class="btn btn-default" ng-click="showModalRemover(ponto)">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
 							</td>
 						</tr>
 					</tbody>
