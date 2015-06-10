@@ -6,12 +6,14 @@ angular.module('pontoApp')
 			restrict: 'A',
 			require: 'ngModel',
 			link: function (scope, element, attrs, ctrls) {
-				var isNative = /(ip(a|o)d|iphone|android)/ig.test($window.navigator.userAgent);
+				var _formartTime, _keyup, _parser, _formatter,
+					isNative = /(ip(a|o)d|iphone|android)/ig.test($window.navigator.userAgent);
+
 				if(isNative) {
 					element.prop('type', 'time');
 				}
 
-				var _formartTime = function (value) {
+				_formartTime = function (value) {
 					if (!value) { return ''; }
 
 					// Remove todos os caracteres que não forem números
@@ -24,14 +26,14 @@ angular.module('pontoApp')
 					return time;
 				};
 
-				element.bind('keyup', function (event) {
+				_keyup = function (event) {
 					if (/(16|17|18|20|35|36|37|38|39|40|45)/.test(event.keyCode)) { return; }
 
 					ctrls.$setViewValue(_formartTime(ctrls.$viewValue));
 					ctrls.$render();
-				});
+				};
 
-				ctrls.$parsers.push(function (value) {
+				_parser = function (value) {
 					// Expressão regular para a mascara HH:mm
 					if (!/^([0-1]\d|2[0-3]):[0-5]\d$/.test(value)) {
 						ctrls.$setValidity('date', false);
@@ -45,11 +47,15 @@ angular.module('pontoApp')
 					data.setMilliseconds(0);
 					ctrls.$setValidity('date', true);
 					return data;
-				});
+				};
 
-				ctrls.$formatters.push(function (value) {
+				_formatter = function (value) {
 					return $filter('date')(value, 'HH:mm');
-				});
+				};
+
+				element.bind('keyup', _keyup);
+				ctrls.$parsers.push(_parser);
+				ctrls.$formatters.push(_formatter);
 			}
 		};
 	});
