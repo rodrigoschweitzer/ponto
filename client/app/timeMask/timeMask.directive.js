@@ -7,6 +7,8 @@ angular.module('pontoApp')
 			require: 'ngModel',
 			link: function (scope, element, attrs, ctrls) {
 				var _formartTime, _keyup, _parser, _formatter,
+					ignoredKeys = /(16|17|18|20|35|36|37|38|39|40|45)/,
+					mask = /^([0-1]\d|2[0-3]):[0-5]\d$/, //HH:mm
 					isNative = /(ip(a|o)d|iphone|android)/ig.test($window.navigator.userAgent);
 
 				if(isNative) {
@@ -27,7 +29,7 @@ angular.module('pontoApp')
 				};
 
 				_keyup = function (event) {
-					if (/(16|17|18|20|35|36|37|38|39|40|45)/.test(event.keyCode)) { return; }
+					if (ignoredKeys.test(event.keyCode)) { return; }
 
 					ctrls.$setViewValue(_formartTime(ctrls.$viewValue));
 					ctrls.$render();
@@ -35,7 +37,7 @@ angular.module('pontoApp')
 
 				_parser = function (value) {
 					// Expressão regular para a mascara HH:mm
-					if (!/^([0-1]\d|2[0-3]):[0-5]\d$/.test(value)) {
+					if (!mask.test(value)) {
 						ctrls.$setValidity('date', false);
 						return value;
 					}
