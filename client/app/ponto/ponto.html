@@ -67,54 +67,22 @@
 			<div class="row">
 				<!-- Total horas trabalhadas -->
 				<div class="col-sm-6 col-md-3">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<span class="glyphicon glyphicon-time"></span>
-							<strong>Trabalhadas (mês)</strong>
-						</div>
-						<div class="panel-body text-right">
-							<span class="lead text-muted">{{ total.horasTrabalhadas | time }}</span>
-						</div>
-					</div>
+					<panel-time id="teste" title="Trabalhadas (mês)" hours="total.horasTrabalhadas" />
 				</div>
 
 				<!-- Total horas extras -->
 				<div class="col-sm-6 col-md-3">
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							<span class="glyphicon glyphicon-time"></span>
-							<strong>Extras (mês)</strong>
-						</div>
-						<div class="panel-body text-right">
-							<span class="lead text-success">{{ total.horasExtras | time }}</span>
-						</div>
-					</div>
+					<panel-time title="Extras (mês)" hours="total.horasExtras" color="success" />
 				</div>
 
 				<!-- Total horas faltantes -->
 				<div class="col-sm-6 col-md-3">
-					<div class="panel panel-danger">
-						<div class="panel-heading">
-							<span class="glyphicon glyphicon-time"></span>
-							<strong>Faltantes (mês)</strong>
-						</div>
-						<div class="panel-body text-right">
-							<span class="lead text-danger">{{ total.horasFaltantes | time }}</span>
-						</div>
-					</div>
+					<panel-time title="Faltantes (mês)" hours="total.horasFaltantes" color="danger" />
 				</div>
 
 				<!-- Total horas banco -->
 				<div class="col-sm-6 col-md-3">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<span class="glyphicon glyphicon-time"></span>
-							<strong>Banco (total)</strong>
-						</div>
-						<div class="panel-body text-right">
-							<span class="lead text-primary">{{ horasBanco | time }}</span>
-						</div>
-					</div>
+					<panel-time title="Banco (total)" hours="horasBanco" color="primary" />
 				</div>
 			</div>
 		</div>
