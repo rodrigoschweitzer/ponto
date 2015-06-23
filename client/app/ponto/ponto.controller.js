@@ -109,14 +109,6 @@ angular.module('pontoApp')
 			var mes = angular.copy($scope.mes);
 
 			PontoService.listar(mes).then(function(pontos) {
-				angular.forEach(pontos, function (ponto) {
-					ponto.data = new Date(ponto.data);
-					if (ponto.entrada1) { ponto.entrada1 = new Date(ponto.entrada1); }
-					if (ponto.saida1) { ponto.saida1 = new Date(ponto.saida1); }
-					if (ponto.entrada2) { ponto.entrada2 = new Date(ponto.entrada2); }
-					if (ponto.saida2) { ponto.saida2 = new Date(ponto.saida2); }
-				});
-
 				$scope.pontos = pontos;
 			});
 

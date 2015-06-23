@@ -61,6 +61,15 @@ exports.index = function(req, res) {
 		.sort('-data')
 		.exec(function (err, pontos) {
 			if (err) { return handleError(res, err); }
+
+			_.forEach(pontos, function (ponto) {
+				ponto.data = new Date(ponto.data);
+				if (ponto.entrada1) { ponto.entrada1 = new Date(ponto.entrada1); }
+				if (ponto.saida1) { ponto.saida1 = new Date(ponto.saida1); }
+				if (ponto.entrada2) { ponto.entrada2 = new Date(ponto.entrada2); }
+				if (ponto.saida2) { ponto.saida2 = new Date(ponto.saida2); }
+			});
+
 			return res.json(200, pontos);
 		});
 };
