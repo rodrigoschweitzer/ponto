@@ -37,7 +37,7 @@ angular.module('pontoApp')
 
 				_parser = function (value) {
 					// Expressão regular para a mascara HH:mm
-					if (!mask.test(value)) {
+					if (value && !mask.test(value)) {
 						ctrls.$setValidity('date', false);
 						return value;
 					}

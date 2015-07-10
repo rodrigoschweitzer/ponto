@@ -45,6 +45,17 @@ angular.module('pontoApp')
 			$scope.labelBotaoSalvar = label;
 		}
 
+		function _converterDatasPonto(pontos) {
+			return _.map(pontos, function (ponto) {
+				if (ponto.data && _.isString(ponto.data)) { ponto.data = new Date(ponto.data); }
+				if (ponto.entrada1 && _.isString(ponto.entrada1)) { ponto.entrada1 = new Date(ponto.entrada1); }
+				if (ponto.saida1 && _.isString(ponto.saida1)) { ponto.saida1 = new Date(ponto.saida1); }
+				if (ponto.entrada2 && _.isString(ponto.entrada2)) { ponto.entrada2 = new Date(ponto.entrada2); }
+				if (ponto.saida2 && _.isString(ponto.saida2)) { ponto.saida2 = new Date(ponto.saida2); }
+				return ponto;
+			});
+		}
+
 		$scope.$watch('mes', function(newValue, oldValue) {
 			if (newValue !== oldValue) {
 				$scope.listar();
@@ -109,7 +120,7 @@ angular.module('pontoApp')
 			var mes = angular.copy($scope.mes);
 
 			PontoService.listar(mes).then(function(pontos) {
-				$scope.pontos = pontos;
+				$scope.pontos = _converterDatasPonto(pontos);
 			});
 
 			$scope.getTotal();

@@ -26,7 +26,10 @@ exports.getHorasExtras = function(entrada1, saida1, entrada2, saida2) {
 };
 
 exports.getHorasFaltantes = function(entrada1, saida1, entrada2, saida2) {
+	if (!saida1 || !saida2) return 0;
+
 	var horasDia = this.getHorasTrabalhadas(entrada1, saida1, entrada2, saida2),
 		diferencaMinutos = horasDia - minutosDiaTrabalhado;
+
 	return diferencaMinutos > 0 ? 0 : Math.abs(diferencaMinutos);
 };
