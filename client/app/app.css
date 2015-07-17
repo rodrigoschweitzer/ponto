@@ -34,3 +34,7 @@ body {
 .row-space {
 	margin-bottom: 15px;
 }
+
+.text-lg {
+	font-size: 40px;
+}
