@@ -38,3 +38,22 @@ body {
 .text-lg {
 	font-size: 40px;
 }
+
+.panel-black {
+  border-color: #000000;
+}
+.panel-black > .panel-heading {
+  color: #fff;
+  background-color: #000000;
+  border-color: #000000;
+}
+.panel-black > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #000000;
+}
+.panel-black > .panel-heading .badge {
+  color: #000000;
+  background-color: #fff;
+}
+.panel-black > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #000000;
+}

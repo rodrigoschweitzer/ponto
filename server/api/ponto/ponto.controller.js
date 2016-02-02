@@ -45,7 +45,17 @@ exports.total = function(req, res) {
 		}
 	]).exec(function(err, dados) {
 		if (err) { return handleError(res, err); }
-		return res.json(200, dados[0]);
+
+		var total = dados[0];
+
+		if (total) {
+			var	horasExtras = total.horasExtras || 0,
+				horasFaltantes = total.horasFaltantes || 0;
+
+			total.horasBancoMes = total.horasExtras - total.horasFaltantes;
+		}
+
+		return res.json(200, total);
 	});
 };
 

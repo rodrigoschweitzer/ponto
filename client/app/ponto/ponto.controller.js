@@ -36,11 +36,7 @@ angular.module('pontoApp')
 
 			$scope.botaoSalvarDesabilitado = !$scope.botaoSalvarDesabilitado;
 
-			if ($scope.botaoSalvarDesabilitado) {
-				label = 'Salvando...';
-			} else {
-				label = 'Salvar';
-			}
+			label = $scope.botaoSalvarDesabilitado ? 'Salvando...' : 'Salvar';
 
 			$scope.labelBotaoSalvar = label;
 		}
