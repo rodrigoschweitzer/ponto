@@ -213,7 +213,7 @@ module.exports = function (grunt) {
       target: {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
-        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/']
+        exclude: ['/json3/', '/es5-shim/']
       }
     },
 
@@ -452,7 +452,7 @@ module.exports = function (grunt) {
 
     injector: {
       options: {
-
+		lineEnding: grunt.util.linefeed
       },
       // Inject application script files into index.html (doesn't include bower)
       scripts: {
@@ -607,7 +607,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'test',
+    // 'test',
     'build'
   ]);
 };
