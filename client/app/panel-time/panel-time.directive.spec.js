@@ -4,7 +4,7 @@ describe('Directive: panelTime', function () {
 
   // load the directive's module and view
   beforeEach(module('pontoApp'));
-  beforeEach(module('app/panelTime/panelTime.html'));
+  beforeEach(module('app/panel-time/panel-time.html'));
 
   var element, scope, compile;
 

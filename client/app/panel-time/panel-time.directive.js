@@ -3,7 +3,7 @@
 angular.module('pontoApp')
 	.directive('panelTime', function () {
 		return {
-			templateUrl: 'app/panelTime/panelTime.html',
+			templateUrl: 'app/panel-time/panel-time.html',
 			restrict: 'E',
 			replace: true,
 			scope: {
