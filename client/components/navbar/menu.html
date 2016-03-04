@@ -7,9 +7,9 @@
 			</div>
 			<div class="aside-body">
 				<ul class="nav side-menu">
-					<li><a ng-href="/" ng-click="$hide()">Home</a></li>
-					<li><a ng-href="/pontos" ng-if="isLoggedIn()" ng-click="$hide()">Registro de Pontos</a></li>
-					<li><a ng-href="/admin" ng-if="isAdmin()" ng-click="$hide()">Usuários</a></li>
+					<li><a ui-sref="main" ng-click="$hide()">Home</a></li>
+					<li><a ui-sref="pontos" ng-if="isLoggedIn()" ng-click="$hide()">Registro de Pontos</a></li>
+					<li><a ui-sref="admin" ng-if="isAdmin()" ng-click="$hide()">Usuários</a></li>
 					<li><a ng-href="javascript:void(0)" ng-if="isLoggedIn()" ng-click="logout($hide)">Sair</a></li>
 				</ul>
 			</div>

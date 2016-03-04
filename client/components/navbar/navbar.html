@@ -13,9 +13,9 @@
 
 		<div class="navbar-collapse hidden-xs">
 			<ul class="nav navbar-nav">
-				<li ng-class="{active: isActive('/')}"><a ng-href="/">Home</a></li>
-				<li ng-if="isLoggedIn()" ng-class="{active: isActive('/pontos')}"><a ng-href="/pontos">Registro de Pontos</a></li>
-				<li ng-if="isAdmin()" ng-class="{active: isActive('/admin')}"><a ng-href="/admin">Usuários</a></li>
+				<li ui-sref-active="active"><a ui-sref="main">Home</a></li>
+				<li ui-sref-active="active" ng-if="isLoggedIn()"><a ui-sref="pontos">Registro de Pontos</a></li>
+				<li ui-sref-active="active" ng-if="isAdmin()"><a ui-sref="admin">Usuários</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
