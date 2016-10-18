@@ -1,0 +1,61 @@
+<md-dialog aria-label="Registrar Ponto">
+	<form name="form" novalidate ng-cloak>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<md-button class="md-icon-button" aria-label="Fechar modal do registro de pontos" flex-order-gt-sm="1" ng-click="vm.fecharModal()">
+					<md-icon md-svg-icon="close"></md-icon>
+				</md-button>
+				<span flex>Registrar Ponto</span>
+				<md-button type="submit" ng-click="vm.salvar()" ng-disabled="form.$invalid || vm.carregando" hide-gt-sm layout layout-align="center center">
+					<md-progress-circular class="md-accent" md-mode="indeterminate" md-diameter="20" ng-show="vm.carregando"></md-progress-circular>
+					<span ng-show="!vm.carregando">Salvar</span>
+				</md-button>
+			</div>
+		</md-toolbar>
+
+		<md-dialog-content>
+			<div class="md-dialog-content">
+
+				<!-- Data -->
+				<md-input-container>
+					<label>Data</label>
+					<md-datepicker md-hide-icons="calendar" md-max-date="vm.hoje" md-open-on-focus ng-model="vm.ponto.data" required></md-datepicker>
+				</md-input-container>
+
+				<div layout layout-wrap>
+					<!-- Entrada 1 -->
+					<md-input-container flex="25" flex-xs="50">
+						<label>Entrada 1</label>
+						<input type="text" name="entrada1" ng-model="vm.ponto.entrada1" time-mask />
+					</md-input-container>
+
+					<!-- Saída 1 -->
+					<md-input-container flex="25" flex-xs="50">
+						<label>Saída 1</label>
+						<input type="text" name="saida1" ng-model="vm.ponto.saida1" time-mask />
+					</md-input-container>
+
+					<!-- Entrada 2 -->
+					<md-input-container flex="25" flex-xs="50">
+						<label>Entrada 2</label>
+						<input type="text" name="entrada2" ng-model="vm.ponto.entrada2" time-mask />
+					</md-input-container>
+
+					<!-- Saída 2 -->
+					<md-input-container flex="25" flex-xs="50">
+						<label>Saída 2</label>
+						<input type="text" name="saida2" ng-model="vm.ponto.saida2" time-mask />
+					</md-input-container>
+				</div>
+			</div>
+		</md-dialog-content>
+
+		<md-dialog-actions hide-xs hide-sm>
+			<md-button type="button" ng-click="vm.fecharModal()">Cancelar</md-button>
+			<md-button type="submit" class="md-primary" ng-click="vm.salvar()" ng-disabled="form.$invalid || vm.carregando" layout layout-align="center center">
+				<md-progress-circular md-mode="indeterminate" md-diameter="20" ng-show="vm.carregando"></md-progress-circular>
+				<span ng-show="!vm.carregando">Salvar</span>
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

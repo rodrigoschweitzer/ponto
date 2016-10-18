@@ -1,30 +1,6 @@
 'use strict';
 
-angular.module('pontoApp', [
-	'ngCookies',
-	'ngResource',
-	'ngSanitize',
-	'ngAnimate',
-	'ui.router',
-	'mgcrea.ngStrap',
-	'angular-loading-bar'
-])
-	.config(function ($urlRouterProvider, $locationProvider, $httpProvider, $datepickerProvider, $timepickerProvider) {
-		angular.extend($datepickerProvider.defaults, {
-			dateFormat: 'dd/MM/yyyy',
-			autoclose: true,
-			useNative: true
-		});
-
-		angular.extend($timepickerProvider.defaults, {
-			timeFormat: 'HH:mm'
-		});
-
-		$urlRouterProvider.otherwise('/');
-		$locationProvider.html5Mode(true);
-		$httpProvider.interceptors.push('authInterceptor');
-	})
-
+angular.module('app', ['app.core', 'app.layout'])
 	.factory('authInterceptor', function ($q, $cookieStore, $location) {
 		return {
 			// Add authorization token to headers
@@ -42,11 +18,11 @@ angular.module('pontoApp', [
 					$location.path('/login');
 					// remove any stale tokens
 					$cookieStore.remove('token');
-					return $q.reject(response);
+				} if (response.status === 403) {
+					$location.path('/login');
 				}
-				else {
-					return $q.reject(response);
-				}
+
+				return $q.reject(response);
 			}
 		};
 	})

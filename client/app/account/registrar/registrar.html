@@ -1,0 +1,44 @@
+<div class="login-container" flex layout layout-align-gt-xs="center center">
+	<md-card flex flex-gt-xs="50" flex-gt-sm="40" flex-gt-md="30" flex-xl="20">
+		<form class="form" name="form" ng-submit="vm.registrar(form)" novalidate>
+			<md-toolbar>
+				<div class="md-toolbar-tools">Registro</div>
+			</md-toolbar>
+
+			<md-card-content layout="column">
+				<md-input-container>
+					<label>Nome</label>
+					<input type="text" name="nome" ng-model="vm.usuario.nome" required />
+					<div ng-messages="form.nome.$error">
+						<div ng-message="required">Campo obrigatório.</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container>
+					<label>E-mail</label>
+					<input type="email" name="email" ng-model="vm.usuario.email" required mongoose-error />
+					<div ng-messages="form.email.$error">
+						<div ng-message="required">Campo obrigatório.</div>
+						<div ng-message="email">E-mail inválido.</div>
+						<div ng-message="mongoose">{{ vm.erros.email }}</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container>
+					<label>Senha</label>
+					<input type="password" name="senha" ng-model="vm.usuario.senha" required ng-minlength="3" mongoose-error />
+					<div ng-messages="form.senha.$error">
+						<div ng-message="required">Campo obrigatório.</div>
+						<div ng-message="minlength">A senha deve ter no mínimo 3 caracteres.</div>
+						<div ng-message="mongoose">{{ vm.erros.password }}</div>
+					</div>
+				</md-input-container>
+
+				<div layout layout-align="end center">
+					<md-button ui-sref="login">Login</md-button>
+					<md-button type="submit" class="md-raised md-primary" ng-disabled="form.$invalid">Registrar-se</md-button>
+				</div>
+			</md-card-content>
+		</form>
+	</md-card>
+</div>

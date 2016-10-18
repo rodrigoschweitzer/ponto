@@ -59,6 +59,22 @@ exports.total = function(req, res) {
 	});
 };
 
+exports.entradas = function(req, res) {
+	Ponto.find({
+			data: {
+				'$gte': req.query.inicio,
+				'$lte': req.query.fim
+			},
+			user: req.user._id
+		})
+		.select('entrada1')
+		.exec(function (err, pontos) {
+			if (err) { return handleError(res, err); }
+
+			return res.json(200, pontos);
+		});
+};
+
 // Get list of pontos
 exports.index = function(req, res) {
 	Ponto.find({

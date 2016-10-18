@@ -13,35 +13,24 @@
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 		<!-- build:css(client) app/vendor.css -->
 			<!-- bower:css -->
-			<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-			<link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.css" />
-			<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-			<link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
 			<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+			<link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+			<link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.css" />
 			<!-- endbower -->
 		<!-- endbuild -->
 		<!-- build:css({.tmp,client}) app/app.css -->
 		<link rel="stylesheet" href="app/app.css">
 			<!-- injector:css -->
-			<link rel="stylesheet" href="app/admin/admin.css">
+			<link rel="stylesheet" href="app/account/login/login.css">
 			<link rel="stylesheet" href="app/app.css">
-			<link rel="stylesheet" href="app/main/main.css">
+			<link rel="stylesheet" href="app/layout/loading/loading.css">
 			<link rel="stylesheet" href="app/ponto/ponto.css">
 			<!-- endinjector -->
 		<!-- endbuild -->
 	</head>
-	<body ng-app="pontoApp">
+	<body layout ng-app="app">
 
-		<div ng-include="'components/navbar/navbar.html'"></div>
-
-		<!-- Add your site or application content here -->
-		<div ui-view=""></div>
-
-		<footer class="footer">
-			<div class="container">
-				<div class="pull-left text-muted small">&copy; COPYRIGHT 2014, Rodrigo Schweitzer</div>
-			</div>
-		</footer>
+		<ui-view flex layout></ui-view>
 
 		<!--[if lt IE 9]>
 		<script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -51,43 +40,54 @@
 			<!-- bower:js -->
 			<script src="bower_components/jquery/dist/jquery.js"></script>
 			<script src="bower_components/angular/angular.js"></script>
-			<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 			<script src="bower_components/angular-resource/angular-resource.js"></script>
 			<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 			<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 			<script src="bower_components/angular-animate/angular-animate.js"></script>
 			<script src="bower_components/lodash/dist/lodash.compat.js"></script>
 			<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-			<script src="bower_components/angular-strap/dist/angular-strap.js"></script>
-			<script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
-			<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
 			<script src="bower_components/Chart.js/Chart.js"></script>
 			<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+			<script src="bower_components/angular-aria/angular-aria.js"></script>
+			<script src="bower_components/angular-messages/angular-messages.js"></script>
+			<script src="bower_components/angular-material/angular-material.js"></script>
+			<script src="bower_components/angular-material-data-table/dist/md-data-table.js"></script>
+			<script src="bower_components/moment/moment.js"></script>
+			<script src="bower_components/gsap/src/uncompressed/TweenMax.js"></script>
+			<script src="bower_components/ngFx/dist/ngFx.js"></script>
 			<!-- endbower -->
 		<!-- endbuild -->
 		<!-- build:js({.tmp,client}) app/app.js -->
 			<script src="app/app.js"></script>
 			<!-- injector:js -->
+			<script src="app/core/core.module.js"></script>
+			<script src="app/layout/layout.module.js"></script>
 			<script src="app/account/account.js"></script>
+			<script src="app/account/alterar-senha/alterar-senha.controller.js"></script>
+			<script src="app/account/auth.service.js"></script>
 			<script src="app/account/login/login.controller.js"></script>
-			<script src="app/account/settings/settings.controller.js"></script>
-			<script src="app/account/signup/signup.controller.js"></script>
-			<script src="app/admin/admin.controller.js"></script>
-			<script src="app/admin/admin.js"></script>
+			<script src="app/account/registrar/registrar.controller.js"></script>
+			<script src="app/core/config.js"></script>
+			<script src="app/core/constants.js"></script>
+			<script src="app/dashboard/dashboard.controller.js"></script>
+			<script src="app/dashboard/dashboard.js"></script>
+			<script src="app/dashboard/dashboard.service.js"></script>
+			<script src="app/layout/loading/loading.directive.js"></script>
+			<script src="app/layout/panel-time/panel-time.directive.js"></script>
+			<script src="app/layout/toolbar-time-picker/toolbar-time-picker.directive.js"></script>
 			<script src="app/main/main.controller.js"></script>
 			<script src="app/main/main.js"></script>
-			<script src="app/panel-time/panel-time.directive.js"></script>
+			<script src="app/ponto/ponto-form.controller.js"></script>
 			<script src="app/ponto/ponto.controller.js"></script>
 			<script src="app/ponto/ponto.js"></script>
 			<script src="app/ponto/ponto.service.js"></script>
 			<script src="app/time-mask/time-mask.directive.js"></script>
 			<script src="app/time/time.filter.js"></script>
-			<script src="components/auth/auth.service.js"></script>
-			<script src="components/auth/user.service.js"></script>
-			<script src="components/locale/angular-locale_pt-br.js"></script>
+			<script src="app/usuarios/user.service.js"></script>
+			<script src="app/usuarios/usuarios.controller.js"></script>
+			<script src="app/usuarios/usuarios.js"></script>
 			<script src="components/mongoose-error/mongoose-error.directive.js"></script>
-			<script src="components/navbar/navbar.controller.js"></script>
-			<script src="components/utils/date-utils.js"></script>
+			<script src="components/utils/date.service.js"></script>
 			<!-- endinjector -->
 		<!-- endbuild -->
 	</body>

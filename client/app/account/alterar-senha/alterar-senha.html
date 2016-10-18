@@ -1,0 +1,29 @@
+<md-card>
+	<form name="form" ng-submit="vm.alterarSenha(form)" novalidate>
+		<md-card-content layout="column" layout-gt-sm>
+
+			<md-input-container flex-gt-sm="50">
+				<label>Senha Atual</label>
+				<input type="password" name="password" ng-model="vm.user.oldPassword" required mongoose-error />
+				<div ng-messages="form.password.$error">
+					<div ng-message="required">Campo obrigatório.</div>
+					<div ng-message="mongoose">Senha incorreta.</div>
+				</div>
+			</md-input-container>
+
+			<md-input-container flex-gt-sm="50">
+				<label>Nova Senha</label>
+				<input type="password" name="newPassword" ng-model="vm.user.newPassword" minlength="3" required />
+				<div ng-messages="form.newPassword.$error">
+					<div ng-message="required">Campo obrigatório.</div>
+					<div ng-message="minlength">Senha deve ter no mínimo 3 caracteres.</div>
+				</div>
+			</md-input-container>
+
+		</md-card-content>
+
+		<md-card-actions layout layout-align="end">
+			<md-button type="submit" class="md-raised md-primary" ng-disabled="form.$invalid">Salvar</md-button>
+		</md-card-actions>
+	</form>
+</md-card>

@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('pontoApp')
+angular.module('app')
 	.config(function ($stateProvider) {
 		$stateProvider
-			.state('ponto', {
+			.state('main.pontos', {
 				url: '/pontos',
 				templateUrl: 'app/ponto/ponto.html',
-				controller: 'PontoCtrl',
+				controller: 'PontoController as vm',
 				authenticate: true
 			});
 	});

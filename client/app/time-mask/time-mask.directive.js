@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pontoApp')
+angular.module('app')
 	.directive('timeMask', timeMask);
 
 	timeMask.$inject = ['$window', '$filter'];

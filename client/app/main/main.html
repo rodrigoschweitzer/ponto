@@ -1,12 +1,43 @@
-<header class="hero-unit" id="banner">
-	<div class="container">
-		<img src="assets/images/yeoman.png" alt="I'm Yeoman">
-		<h1>SRP</h1>
-		<p class="lead">Sistema de Registro de Ponto</p>
-		<div ng-hide="isLoggedIn()">
-			<a ng-href="/signup" class="btn btn-default btn-lg">Registrar</a>
-			<span>ou</span>
-			<a ng-href="/login" class="btn btn-default btn-lg">Login</a>
+<md-sidenav class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="sidemenu" md-whiteframe="4">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<span>Olá, {{ currentUser.name }}</span>
 		</div>
-	</div>
-</header>
+	</md-toolbar>
+	<md-content>
+		<md-list>
+			<md-list-item class="" ng-if="isLoggedIn()" ng-class="{ 'active': isActive('main.pontos') }" ng-click="goTo('main.pontos')">
+				<md-icon md-svg-icon="alarm"></md-icon>
+				<p>Registro de Pontos</p>
+			</md-list-item>
+			<md-list-item ng-if="isAdmin()" ng-class="{ 'active': isActive('main.usuarios') }" ng-click="goTo('main.usuarios')">
+				<md-icon md-svg-icon="people"></md-icon>
+				<p>Usuários</p>
+			</md-list-item>
+			<md-list-item ng-if="isLoggedIn()" ng-class="{ 'active': isActive('main.alterar-senha') }" ng-click="goTo('main.alterar-senha')">
+				<md-icon md-svg-icon="lock-outline"></md-icon>
+				<p>Alterar Senha</p>
+			</md-list-item>
+			<md-divider ng-if="isLoggedIn()"></md-divider>
+			<md-list-item ng-if="isLoggedIn()" ng-click="logout()">
+				<md-icon md-svg-icon="exit-to-app"></md-icon>
+				<p>Sair</p>
+			</md-list-item>
+		</md-list>
+	</md-content>
+</md-sidenav>
+
+<div layout="column" flex>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<md-button class="md-icon-button" aria-label="Abrir menu lateral" hide-gt-sm ng-click="toggleMenu()">
+				<md-icon md-svg-icon="menu"></md-icon>
+			</md-button>
+			<h2>SRP</h2>
+		</div>
+	</md-toolbar>
+
+	<md-content flex layout layout-align="center">
+		<div ui-view flex flex-gt-sm="80" flex-xl="60"></div>
+	</md-content>
+</div>

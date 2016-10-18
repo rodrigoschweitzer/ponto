@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pontoApp')
+angular.module('app')
 	.filter('time', function () {
 		function _formatar(tempo) {
 			var horas = Math.floor(Math.abs(tempo) / 60),

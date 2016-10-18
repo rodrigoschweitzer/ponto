@@ -1,95 +1,77 @@
-<div class="container">
-	<div class="row row-space">
-		<div class="col-xs-12">
-			<button class="btn btn-primary pull-right" ng-click="showModalPonto()">Registrar Ponto</button>
+<md-card>
+	<toolbar-time-picker date="vm.mes"></toolbar-time-picker>
+
+	<md-toolbar class="md-table-toolbar fx-fade-normal" ng-show="vm.pontoSelecionado.length">
+		<div class="md-toolbar-tools">
+			<span>Dia {{ vm.pontoSelecionado[0].data | date: 'dd' }} selecionado</span>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="vm.exibirModalPonto(vm.pontoSelecionado[0])">
+				<md-icon md-svg-icon="edit"></md-icon>
+				<md-tooltip>Editar</md-tooltip>
+			</md-button>
+			<md-button class="md-icon-button" ng-click="vm.exibirModalRemover(vm.pontoSelecionado[0])">
+				<md-icon md-svg-icon="delete"></md-icon>
+				<md-tooltip>Remover</md-tooltip>
+			</md-button>
 		</div>
-	</div>
+	</md-toolbar>
 
-	<div class="row row-space">
-		<div class="col-xs-12">
-			<div class="btn-group">
-				<button type="button" class="btn btn-default" ng-click="anterior()">
-					<span class="glyphicon glyphicon-arrow-left"></span>
-				</button>
-				<button type="button" class="btn btn-default" ng-model="mes" data-min-view="1" bs-datepicker>
-					{{ mes | date: 'MMMM yyyy' }}
-				</button>
-				<button type="button" class="btn btn-default" ng-click="proximo()">
-					<span class="glyphicon glyphicon-arrow-right"></span>
-				</button>
-			</div>
+	<md-card-content loading="vm.carregando">
+		<md-table-container ng-show="vm.possuiRegistros()">
+			<table md-table md-row-select ng-model="vm.pontoSelecionado">
+				<thead md-head>
+					<tr md-row>
+						<th md-column>Dia</th>
+						<th md-column>Entrada / Saída</th>
+						<th md-column>Trabalhadas</th>
+						<th md-column>Extra / Faltantes</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select="ponto" md-select-id="ponto._id" md-auto-select ng-repeat="ponto in vm.pontos track by ponto._id">
+						<td md-cell>
+							{{ ::ponto.data | date: 'dd' }}</span>
+						</td>
+						<td md-cell>
+							<div layout="column">
+								<span ng-if="ponto.formatados.registro1">{{ ::ponto.formatados.registro1 }}</span>
+								<span ng-if="ponto.formatados.registro2">{{ ::ponto.formatados.registro2 }}</span>
+							</div>
+						</td>
+						<td md-cell>
+							<span class="hora-trabalhada"><md-icon md-svg-icon="alarm-on"></md-icon>{{ ::ponto.formatados.horasTrabalhadas }}</span>
+						</td>
+						<td md-cell>
+							<span ng-if="!ponto.horasExtras && !ponto.horasFaltantes">
+								<md-icon md-svg-icon="alarm"></md-icon> 00:00
+							</span>
+							<span ng-if="ponto.horasExtras" class="hora-extra">
+								<md-icon md-svg-icon="alarm-add"></md-icon>{{ ::ponto.formatados.horasExtras }}
+							</span>
+							<span ng-if="ponto.horasFaltantes" class="hora-faltante">
+								<md-icon md-svg-icon="alarm-off"></md-icon>{{ ::ponto.formatados.horasFaltantes }}
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+
+		<div flex class="md-title text-grey" ng-show="!vm.possuiRegistros()" layout layout-align="center center">
+			Nenhum registro de ponto cadastrado para este mês.
 		</div>
-	</div>
+	</md-card-content>
 
-	<div class="row row-space">
-		<div class="col-xs-12">
-			<div class="table-responsive">
-				<table class="table table-striped" ng-show="possuiRegistros()">
-					<thead>
-						<tr>
-							<th>Dia</th>
-							<th>Entrada / Saída</th>
-							<th>Trabalhadas</th>
-							<th>Extra</th>
-							<th>Faltantes</th>
-							<th>Ações</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="ponto in pontos">
-							<td>
-								{{ ponto.data | date: 'dd' }}<span class="hidden-xs"> - {{ ponto.data | date: 'EEE' }}</span>
-							</td>
-							<td>
-								{{ ponto.entrada1 | date: 'HH:mm' }} - {{ ponto.saida1 | date: 'HH:mm' }}<br>
-								{{ ponto.entrada2 | date: 'HH:mm' }} - {{ ponto.saida2 | date: 'HH:mm' }}
-							</td>
-							<td>{{ ponto.horasTrabalhadas | time }}</td>
-							<td>{{ ponto.horasExtras | time }}</td>
-							<td>{{ ponto.horasFaltantes | time }}</td>
-							<td>
-								<button class="btn btn-default" ng-click="showModalPonto(ponto)">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</button>
-								<button class="btn btn-default" ng-click="showModalRemover(ponto)">
-									<span class="glyphicon glyphicon-trash"></span>
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+	<md-button class="md-fab" ng-class="{ 'md-fab-top-right': vm.telaGrande(), 'md-fab-bottom-right md-fab-fixed': !vm.telaGrande() }" ng-click="vm.exibirModalPonto()">
+		<md-icon md-svg-icon="add"></md-icon>
+		<md-tooltip md-direction="left">Registrar Ponto</md-tooltip>
+	</md-button>
+</md-card>
 
-			<div class="alert alert-info" ng-hide="possuiRegistros()">
-				<p>Não foi encontrado nenhum registro de ponto para este mês.</p>
-			</div>
-
-			<div class="row">
-				<!-- Total horas trabalhadas -->
-				<div class="col-sm-6 col-md-4">
-					<panel-time title="Trabalhadas (mês)" hours="total.horasTrabalhadas" />
-				</div>
-
-				<!-- Total horas extras -->
-				<div class="col-sm-6 col-md-4">
-					<panel-time title="Extras (mês)" hours="total.horasExtras" color="success" />
-				</div>
-
-				<!-- Total horas faltantes -->
-				<div class="col-sm-6 col-md-4">
-					<panel-time title="Faltantes (mês)" hours="total.horasFaltantes" color="danger" />
-				</div>
-
-				<!-- Total horas mês -->
-				<div class="col-sm-6 col-md-offset-2 col-md-4">
-					<panel-time title="Banco (mês)" hours="total.horasBancoMes" color="primary" />
-				</div>
-
-				<!-- Total horas banco -->
-				<div class="col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-4">
-					<panel-time title="Banco (total)" hours="horasBanco" color="black" />
-				</div>
-			</div>
-		</div>
-	</div>
+<div layout layout-wrap>
+	<panel-time flex="100" flex-gt-xs="50" flex-gt-md="33" title="Trabalhadas (mês)" hours="vm.total.horasTrabalhadas" color="grey"></panel-time>
+	<panel-time flex="100" flex-gt-xs="50" flex-gt-md="33" title="Extras (mês)" hours="vm.total.horasExtras" color="green"></panel-time>
+	<panel-time flex="100" flex-gt-xs="50" flex-gt-md="33" title="Faltantes (mês)" hours="vm.total.horasFaltantes" color="red"></panel-time>
+	<panel-time flex="100" flex-gt-xs="50" flex-gt-md="33" flex-offset-gt-md="15" title="Banco (mês)" hours="vm.total.horasBancoMes" color="light-blue"></panel-time>
+	<panel-time flex="100" flex-gt-xs="50" flex-offset-gt-xs="25" flex-gt-md="33" flex-offset-gt-md="0" title="Banco (total)" hours="vm.horasBanco" color="pink"></panel-time>
 </div>

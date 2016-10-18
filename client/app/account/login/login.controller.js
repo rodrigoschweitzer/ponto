@@ -1,21 +1,30 @@
-'use strict';
+(function () {
+	'use strict';
 
-angular.module('pontoApp')
-	.controller('LoginCtrl', function ($scope, Auth, $location) {
-		$scope.user = {};
-		$scope.mensagem = '';
+	angular
+		.module('app')
+		.controller('LoginController', LoginController);
 
-		$scope.login = function() {
+	LoginController.$inject = ['$state', 'Auth'];
+
+	function LoginController($state, Auth) {
+		var vm = this;
+		vm.usuario = {};
+		vm.mensagem = '';
+		vm.login = login;
+
+		function login() {
 			Auth.login({
-				email: $scope.user.email,
-				password: $scope.user.password
-			})
-			.then(function() {
-				$location.path('/pontos');
-			})
-			.catch(function(err) {
-				$scope.mensagem = err.message;
-			});
-		};
+					email: vm.usuario.email,
+					password: vm.usuario.senha
+				})
+				.then(function () {
+					$state.go('main.pontos');
+				})
+				.catch(function (erro) {
+					vm.mensagem = erro.message;
+				});
+		}
 
-	});
+	}
+})();
