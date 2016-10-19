@@ -28,20 +28,20 @@
 
 	function iconConfig($mdIconProvider) {
 		$mdIconProvider
-			.icon('menu', 'assets/icons/menu-white.svg', 24)
-			.icon('delete', 'assets/icons/delete.svg', 24)
-			.icon('edit', 'assets/icons/edit.svg', 24)
-			.icon('arrow-back', 'assets/icons/arrow-back-black.svg', 24)
-			.icon('arrow-forward', 'assets/icons/arrow-forward-black.svg', 24)
-			.icon('add', 'assets/icons/add.svg', 24)
-			.icon('alarm', 'assets/icons/alarm.svg', 24)
-			.icon('alarm-add', 'assets/icons/alarm-add.svg', 24)
-			.icon('alarm-off', 'assets/icons/alarm-off.svg', 24)
-			.icon('alarm-on', 'assets/icons/alarm-on.svg', 24)
-			.icon('close', 'assets/icons/close-white.svg', 24)
-			.icon('exit-to-app', 'assets/icons/exit-to-app.svg', 24)
-			.icon('lock-outline', 'assets/icons/lock-outline.svg', 24)
-			.icon('people', 'assets/icons/people.svg', 24);
+			.icon('menu', 'assets/images/icons/menu-white.svg', 24)
+			.icon('delete', 'assets/images/icons/delete.svg', 24)
+			.icon('edit', 'assets/images/icons/edit.svg', 24)
+			.icon('arrow-back', 'assets/images/icons/arrow-back-black.svg', 24)
+			.icon('arrow-forward', 'assets/images/icons/arrow-forward-black.svg', 24)
+			.icon('add', 'assets/images/icons/add.svg', 24)
+			.icon('alarm', 'assets/images/icons/alarm.svg', 24)
+			.icon('alarm-add', 'assets/images/icons/alarm-add.svg', 24)
+			.icon('alarm-off', 'assets/images/icons/alarm-off.svg', 24)
+			.icon('alarm-on', 'assets/images/icons/alarm-on.svg', 24)
+			.icon('close', 'assets/images/icons/close-white.svg', 24)
+			.icon('exit-to-app', 'assets/images/icons/exit-to-app.svg', 24)
+			.icon('lock-outline', 'assets/images/icons/lock-outline.svg', 24)
+			.icon('people', 'assets/images/icons/people.svg', 24);
 	}
 
 	core.config(configure);

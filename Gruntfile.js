@@ -11,6 +11,7 @@ module.exports = function (grunt) {
 
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
+	babel: 'grunt-babel',
     express: 'grunt-express-server',
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
@@ -33,6 +34,17 @@ module.exports = function (grunt) {
       client: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
+	babel: {
+		options: {
+			sourceMap: true,
+			presets: ['babel-preset-es2015']
+		},
+		dist: {
+			files: {
+				'.tmp/concat/app/app.js': '.tmp/concat/app/app.js'
+			}
+		}
+	},
     express: {
       options: {
         port: process.env.PORT || 9000
@@ -597,6 +609,7 @@ module.exports = function (grunt) {
     'autoprefixer',
     'ngtemplates',
     'concat',
+	'babel',
     'ngAnnotate',
     'copy:dist',
     'cdnify',

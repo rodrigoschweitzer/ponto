@@ -55,3 +55,8 @@ md-toolbar.toolbar-white {
 	color: #000000;
 	background-color: #ffffff;
 }
+
+md-toolbar.toolbar-white md-icon {
+	color: #000000;
+	fill: #000000;
+}
