@@ -60,11 +60,3 @@ md-toolbar.toolbar-white md-icon {
 	color: #000000;
 	fill: #000000;
 }
-
-/* Rever implementação */
-/*@media print {
-	td.md-checkbox-column,
-	td.md-checkbox-cell {
-		display: none !important;
-	}
-}*/

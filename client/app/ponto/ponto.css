@@ -41,3 +41,10 @@ md-toolbar.md-table-toolbar .md-toolbar-tools md-icon {
 	fill: #F44336;
 	margin: 0 5px 0 0;
 }
+
+@media print {
+	th.md-checkbox-column,
+	td.md-checkbox-cell {
+		display: none !important;
+	}
+}
