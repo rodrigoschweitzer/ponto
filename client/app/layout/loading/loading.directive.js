@@ -5,9 +5,9 @@
 		.module('app')
 		.directive('loading', Loading);
 
-	Loading.$inject = ['$compile', '$timeout'];
+	Loading.$inject = ['$compile'];
 
-	function Loading($compile, $timeout) {
+	function Loading($compile) {
 		var directive = {
 			restrict: 'A',
 			scope: {
@@ -18,22 +18,21 @@
 
 		return directive;
 
-		function linkFunc(scope, el) {
-			var templateUrl = 'app/layout/loading/loading.html',
-				loadingWatchInstance,
+		function linkFunc(scope) {
+			var loadingWatchInstance,
 				$backdrop,
 				$container,
 				$body = $('body');
 
 			scope.$on('$destroy', function () {
-				loadingWatchInstance()
-				if ($container) $container.remove();
-				if ($backdrop) $backdrop.remove();
+				loadingWatchInstance();
+				if ($container) { $container.remove(); }
+				if ($backdrop) { $backdrop.remove(); }
 			});
 
 			injetarHtml();
 
-			function injetarHtml(exibir) {
+			function injetarHtml() {
 				var templateCompilado = getTemplateCompilado();
 				$body.append(templateCompilado);
 				$backdrop = $body.find('.loading-backdrop');
@@ -59,7 +58,11 @@
 			}
 
 			function observeLoading(value) {
-				value ? show() : hide();
+				if (value) {
+					show();
+				} else {
+					hide();
+				}
 			}
 
 			function show() {

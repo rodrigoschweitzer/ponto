@@ -5,7 +5,7 @@
 		.module('app')
 		.config(config);
 
-	config.$inject = ['$stateProvider']
+	config.$inject = ['$stateProvider'];
 
 	function config($stateProvider) {
 		$stateProvider

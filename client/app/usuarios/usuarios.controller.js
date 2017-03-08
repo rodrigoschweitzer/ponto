@@ -28,7 +28,7 @@
 				.cancel('Cancelar')
 			)
 			.then(confirmar => {
-				if (confirmar) removerUsuario(usuario);
+				if (confirmar) { removerUsuario(usuario); }
 			});
 		}
 

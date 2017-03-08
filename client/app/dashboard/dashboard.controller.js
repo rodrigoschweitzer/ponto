@@ -19,7 +19,7 @@
 			options: {
 				bezierCurve: false
 			}
-		}
+		};
 
 		activate();
 

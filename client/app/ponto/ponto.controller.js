@@ -80,7 +80,7 @@
 			vm.carregando = true;
 			limparPontoSelecionado();
 			PontoService.listar(vm.mes).then(pontos => {
-				vm.pontos = pontos
+				vm.pontos = pontos;
 				vm.carregando = false;
 			});
 			obterTotalHoras();

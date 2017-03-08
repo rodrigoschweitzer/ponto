@@ -37,6 +37,6 @@
 						vm.carregando = false;
 					});
 			}
-		};
+		}
 	}
 })();
