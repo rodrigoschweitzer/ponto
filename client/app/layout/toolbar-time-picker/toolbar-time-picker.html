@@ -1,6 +1,6 @@
 <md-toolbar class="toolbar-white">
 	<div class="md-toolbar-tools">
-		<md-button class="md-icon-button" aria-label="Mês Anterior" ng-disabled="!isValidPrevMonth()" ng-click="prevMonth()">
+		<md-button class="md-icon-button" aria-label="Mês Anterior" ng-disabled="!isValidPrevMonth()" ng-click="prevMonth()" hide-print>
 			<md-icon md-svg-icon="arrow-back"></md-icon>
 			<md-tooltip>Mês Anterior</md-tooltip>
 		</md-button>
@@ -15,7 +15,7 @@
 			</md-select>
 		</div>
 
-		<md-button class="md-icon-button" aria-label="Próximo Mês" ng-disabled="!isValidNextMonth()" ng-click="nextMonth()">
+		<md-button class="md-icon-button" aria-label="Próximo Mês" ng-disabled="!isValidNextMonth()" ng-click="nextMonth()" hide-print>
 			<md-icon md-svg-icon="arrow-forward"></md-icon>
 			<md-tooltip>Próximo Mês</md-tooltip>
 		</md-button>

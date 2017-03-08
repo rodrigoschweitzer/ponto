@@ -1,25 +1,25 @@
-<md-sidenav class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="sidemenu" md-whiteframe="4">
+<md-sidenav class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="sidemenu" md-whiteframe="4" hide-print>
 	<md-toolbar>
 		<div class="md-toolbar-tools">
-			<span>Olá, {{ currentUser.name }}</span>
+			<span>Olá, {{ vm.currentUser.name }}</span>
 		</div>
 	</md-toolbar>
 	<md-content>
 		<md-list>
-			<md-list-item class="" ng-if="isLoggedIn()" ng-class="{ 'active': isActive('main.pontos') }" ng-click="goTo('main.pontos')">
+			<md-list-item ng-if="vm.isLoggedIn()" ng-class="{ 'active': vm.isActive('main.pontos') }" ng-click="vm.goTo('main.pontos')">
 				<md-icon md-svg-icon="alarm"></md-icon>
 				<p>Registro de Pontos</p>
 			</md-list-item>
-			<md-list-item ng-if="isAdmin()" ng-class="{ 'active': isActive('main.usuarios') }" ng-click="goTo('main.usuarios')">
+			<md-list-item ng-if="vm.isAdmin()" ng-class="{ 'active': vm.isActive('main.usuarios') }" ng-click="vm.goTo('main.usuarios')">
 				<md-icon md-svg-icon="people"></md-icon>
 				<p>Usuários</p>
 			</md-list-item>
-			<md-list-item ng-if="isLoggedIn()" ng-class="{ 'active': isActive('main.alterar-senha') }" ng-click="goTo('main.alterar-senha')">
+			<md-list-item ng-if="vm.isLoggedIn()" ng-class="{ 'active': vm.isActive('main.alterar-senha') }" ng-click="vm.goTo('main.alterar-senha')">
 				<md-icon md-svg-icon="lock-outline"></md-icon>
 				<p>Alterar Senha</p>
 			</md-list-item>
-			<md-divider ng-if="isLoggedIn()"></md-divider>
-			<md-list-item ng-if="isLoggedIn()" ng-click="logout()">
+			<md-divider ng-if="vm.isLoggedIn()"></md-divider>
+			<md-list-item ng-if="vm.isLoggedIn()" ng-click="vm.logout()">
 				<md-icon md-svg-icon="exit-to-app"></md-icon>
 				<p>Sair</p>
 			</md-list-item>
@@ -30,7 +30,7 @@
 <div layout="column" flex>
 	<md-toolbar>
 		<div class="md-toolbar-tools">
-			<md-button class="md-icon-button" aria-label="Abrir menu lateral" hide-gt-sm ng-click="toggleMenu()">
+			<md-button class="md-icon-button" aria-label="Abrir menu lateral" hide-gt-sm ng-click="vm.toggleMenu()">
 				<md-icon md-svg-icon="menu"></md-icon>
 			</md-button>
 			<h2>SRP</h2>

@@ -1,14 +1,20 @@
 'use strict';
 
-angular.module('app')
-	.controller('MainController', function ($scope, $state, $mdSidenav, Auth) {
-		$scope.isLoggedIn = Auth.isLoggedIn;
-		$scope.isAdmin = Auth.isAdmin;
-		$scope.currentUser = Auth.getCurrentUser();
-		$scope.toggleMenu = toggleMenu;
-		$scope.logout = logout;
-		$scope.goTo = goTo;
-		$scope.isActive = isActive;
+angular
+	.module('app')
+	.controller('MainController', MainController);
+
+	MainController.$inject = ['$state', '$mdSidenav', '$mdDialog', 'Auth'];
+
+	function MainController($state, $mdSidenav, $mdDialog, Auth) {
+		var vm = this;
+		vm.isLoggedIn = Auth.isLoggedIn;
+		vm.isAdmin = Auth.isAdmin;
+		vm.currentUser = Auth.getCurrentUser();
+		vm.toggleMenu = toggleMenu;
+		vm.logout = logout;
+		vm.goTo = goTo;
+		vm.isActive = isActive;
 
 		function isActive(state) {
 			return $state.is(state);
@@ -24,7 +30,18 @@ angular.module('app')
 		}
 
 		function logout() {
-			Auth.logout();
-			goTo('login');
-		};
-	});
+			$mdDialog.show(
+				$mdDialog.confirm()
+					.title('Confirmar Saída')
+					.textContent(`Você deseja realmente sair?`)
+					.ok('Sair')
+					.cancel('Cancelar')
+			)
+			.then(confirmar => {
+				if (confirmar) {
+					Auth.logout();
+					goTo('login');
+				}
+			});
+		}
+	}

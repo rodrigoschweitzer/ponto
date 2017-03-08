@@ -30,26 +30,26 @@
 				<tbody md-body>
 					<tr md-row md-select="ponto" md-select-id="ponto._id" md-auto-select ng-repeat="ponto in vm.pontos track by ponto._id">
 						<td md-cell>
-							{{ ::ponto.data | date: 'dd' }}</span>
+							{{ ponto.data | date: 'dd' }}</span>
 						</td>
 						<td md-cell>
 							<div layout="column">
-								<span ng-if="ponto.formatados.registro1">{{ ::ponto.formatados.registro1 }}</span>
-								<span ng-if="ponto.formatados.registro2">{{ ::ponto.formatados.registro2 }}</span>
+								<span ng-if="ponto.formatados.registro1">{{ ponto.formatados.registro1 }}</span>
+								<span ng-if="ponto.formatados.registro2">{{ ponto.formatados.registro2 }}</span>
 							</div>
 						</td>
 						<td md-cell>
-							<span class="hora-trabalhada"><md-icon md-svg-icon="alarm-on"></md-icon>{{ ::ponto.formatados.horasTrabalhadas }}</span>
+							<span class="hora-trabalhada"><md-icon md-svg-icon="alarm-on" ng-show="ponto.horasTrabalhadas" hide-print></md-icon>{{ ponto.formatados.horasTrabalhadas }}</span>
 						</td>
 						<td md-cell>
 							<span ng-if="!ponto.horasExtras && !ponto.horasFaltantes">
-								<md-icon md-svg-icon="alarm"></md-icon> 00:00
+								<md-icon md-svg-icon="alarm" hide-print></md-icon> 00:00
 							</span>
 							<span ng-if="ponto.horasExtras" class="hora-extra">
-								<md-icon md-svg-icon="alarm-add"></md-icon>{{ ::ponto.formatados.horasExtras }}
+								<md-icon md-svg-icon="alarm-add" hide-print></md-icon>{{ ponto.formatados.horasExtras }}
 							</span>
 							<span ng-if="ponto.horasFaltantes" class="hora-faltante">
-								<md-icon md-svg-icon="alarm-off"></md-icon>{{ ::ponto.formatados.horasFaltantes }}
+								<md-icon md-svg-icon="alarm-off" hide-print></md-icon>{{ ponto.formatados.horasFaltantes }}
 							</span>
 						</td>
 					</tr>
@@ -62,13 +62,13 @@
 		</div>
 	</md-card-content>
 
-	<md-button class="md-fab" ng-class="{ 'md-fab-top-right': vm.telaGrande(), 'md-fab-bottom-right md-fab-fixed': !vm.telaGrande() }" ng-click="vm.exibirModalPonto()">
+	<md-button class="md-fab" hide-print ng-class="{ 'md-fab-top-right': vm.telaGrande(), 'md-fab-bottom-right md-fab-fixed': !vm.telaGrande() }" ng-click="vm.exibirModalPonto()">
 		<md-icon md-svg-icon="add"></md-icon>
 		<md-tooltip md-direction="left">Registrar Ponto</md-tooltip>
 	</md-button>
 </md-card>
 
-<div layout layout-wrap>
+<div layout layout-wrap hide-print>
 	<panel-time flex="100" flex-gt-xs="50" flex-gt-md="33" title="Trabalhadas (mês)" hours="vm.total.horasTrabalhadas" color="grey"></panel-time>
 	<panel-time flex="100" flex-gt-xs="50" flex-gt-md="33" title="Extras (mês)" hours="vm.total.horasExtras" color="green"></panel-time>
 	<panel-time flex="100" flex-gt-xs="50" flex-gt-md="33" title="Faltantes (mês)" hours="vm.total.horasFaltantes" color="red"></panel-time>
