@@ -1,22 +1,22 @@
 <md-toolbar class="toolbar-white">
 	<div class="md-toolbar-tools">
-		<md-button class="md-icon-button" aria-label="Mês Anterior" ng-click="prevMonth()">
-			<md-icon  md-svg-icon="arrow-back"></md-icon>
+		<md-button class="md-icon-button" aria-label="Mês Anterior" ng-disabled="!isValidPrevMonth()" ng-click="prevMonth()">
+			<md-icon md-svg-icon="arrow-back"></md-icon>
 			<md-tooltip>Mês Anterior</md-tooltip>
 		</md-button>
 
 		<div flex layout layout-align="center center">
 			<md-select class="md-no-underline" aria-label="Selecione o mês" ng-model="selectedMonth" ng-change="selectMonth()">
-				<md-option ng-repeat="month in months" ng-value="month.value">{{ month.label }}</md-option>
+				<md-option ng-repeat="month in months track by $index" ng-value="month.value">{{ month.label }}</md-option>
 			</md-select>
 
-			<md-select class="md-no-underline" aria-label="Selecione o ano" ng-model="selectedYear">
-				<md-option ng-repeat="year in years" ng-value="year.value">{{ year.label }}</md-option>
+			<md-select class="md-no-underline" aria-label="Selecione o ano" ng-model="selectedYear" ng-change="selectYear()">
+				<md-option ng-repeat="year in years track by $index" ng-value="year.value">{{ year.label }}</md-option>
 			</md-select>
 		</div>
 
-		<md-button class="md-icon-button" aria-label="Próximo Mês" ng-click="nextMonth()">
-			<md-icon  md-svg-icon="arrow-forward"></md-icon>
+		<md-button class="md-icon-button" aria-label="Próximo Mês" ng-disabled="!isValidNextMonth()" ng-click="nextMonth()">
+			<md-icon md-svg-icon="arrow-forward"></md-icon>
 			<md-tooltip>Próximo Mês</md-tooltip>
 		</md-button>
 	</div>

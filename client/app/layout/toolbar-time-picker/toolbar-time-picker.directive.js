@@ -20,31 +20,45 @@
 
 		function linkFunc(scope) {
 			if (!angular.isDate(scope.date)) {
-				throw new Error('date deve ser um objeto do tipo Date.');
+				throw new Error('The date parameter must be a Date object.');
 			}
 
-			scope.months = getMonths();
-			scope.years = getYears();
+			let baseDate = scope.date,
+				baseYear = baseDate.getFullYear(),
+				baseMonth = baseDate.getMonth();
+
 			scope.selectedMonth = scope.date.getMonth();
 			scope.selectedYear = scope.date.getFullYear();
+			scope.months = [];
+			scope.years = [];
 			scope.prevMonth = prevMonth;
 			scope.nextMonth = nextMonth;
 			scope.selectMonth = selectMonth;
 			scope.selectYear = selectYear;
+			scope.isValidPrevMonth = isValidPrevMonth;
+			scope.isValidNextMonth = isValidNextMonth;
+
+			init();
+
+			function init() {
+				scope.months = getMonths();
+				scope.years = getYears();
+			}
 
 			function prevMonth() {
-				scope.date.prevMonth();
-				refreshMonthYear();
+				if (isValidPrevMonth()) {
+					scope.date.prevMonth();
+					refreshMonthYear();
+					scope.months = getMonths();
+				}
 			}
 
 			function nextMonth() {
-				scope.date.nextMonth();
-				refreshMonthYear();
-			}
-
-			function refreshMonthYear() {
-				scope.selectedMonth = scope.date.getMonth();
-				scope.selectedYear = scope.date.getFullYear();
+				if (isValidNextMonth()) {
+					scope.date.nextMonth();
+					refreshMonthYear();
+					scope.months = getMonths();
+				}
 			}
 
 			function selectMonth() {
@@ -53,36 +67,72 @@
 
 			function selectYear() {
 				scope.date.setFullYear(scope.selectedYear);
+				scope.months = getMonths();
 			}
 
-			function getYears() {
+			function isValidPrevMonth() {
 				let year = scope.date.getFullYear(),
-					start = year - 10,
-					end = year + 10,
-					years = [];
+					month = scope.date.getMonth(),
+					startYear = baseYear - 10,
+					january = 0;
 
-				while (start <= end) {
-					years.push({ label: start, value: start++ });
-				}
+				return year > startYear || month > january;
+			}
 
-				return years;
+			function isValidNextMonth() {
+				let year = scope.date.getFullYear(),
+					month = scope.date.getMonth();
+
+				return year < baseYear || month < baseMonth;
+			}
+
+			function refreshMonthYear() {
+				scope.selectedMonth = scope.date.getMonth();
+				scope.selectedYear = scope.date.getFullYear();
 			}
 
 			function getMonths() {
-				return [
-					{ label: 'Janeiro', value: 0 },
-					{ label: 'Fevereiro', value: 1 },
-					{ label: 'Março', value: 2 },
-					{ label: 'Abril', value: 3 },
-					{ label: 'Maio', value: 4 },
-					{ label: 'Junho', value: 5 },
-					{ label: 'Julho', value: 6 },
-					{ label: 'Agosto', value: 7 },
-					{ label: 'Setembro', value: 8 },
-					{ label: 'Outubro', value: 9 },
-					{ label: 'Novembro', value: 10 },
-					{ label: 'Dezembro', value: 11 }
-				];
+				let months = [
+						{ label: 'Janeiro', value: 0 },
+						{ label: 'Fevereiro', value: 1 },
+						{ label: 'Março', value: 2 },
+						{ label: 'Abril', value: 3 },
+						{ label: 'Maio', value: 4 },
+						{ label: 'Junho', value: 5 },
+						{ label: 'Julho', value: 6 },
+						{ label: 'Agosto', value: 7 },
+						{ label: 'Setembro', value: 8 },
+						{ label: 'Outubro', value: 9 },
+						{ label: 'Novembro', value: 10 },
+						{ label: 'Dezembro', value: 11 }
+					],
+					year = scope.date.getFullYear();
+
+				if (year === baseYear) {
+					updateSelectedMonth();
+
+					months = months.filter(month => baseMonth >= month.value);
+				}
+
+				return months;
+			}
+
+			function updateSelectedMonth() {
+				if (scope.date.getMonth() > baseMonth) {
+					scope.date.setMonth(baseMonth);
+					scope.selectedMonth = baseMonth;
+				}
+			}
+
+			function getYears() {
+				let years = [],
+					startYear = baseYear - 10;
+
+				while (startYear <= baseYear) {
+					years.push({ label: startYear, value: startYear++ });
+				}
+
+				return years;
 			}
 		}
 	}
