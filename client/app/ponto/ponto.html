@@ -1,15 +1,15 @@
 <md-card>
 	<toolbar-time-picker date="vm.mes"></toolbar-time-picker>
 
-	<md-toolbar class="md-table-toolbar fx-fade-normal" ng-show="vm.pontoSelecionado.length">
+	<md-toolbar class="md-table-toolbar fx-fade-normal" ng-show="!vm.telaGrande() && vm.pontosSelecionados.length">
 		<div class="md-toolbar-tools">
-			<span>Dia {{ vm.pontoSelecionado[0].data | date: 'dd' }} selecionado</span>
+			<span>Dia {{ vm.pontoSelecionado.data | date: 'dd' }} selecionado</span>
 			<span flex></span>
-			<md-button class="md-icon-button" ng-click="vm.exibirModalPonto(vm.pontoSelecionado[0])">
+			<md-button class="md-icon-button" ng-click="vm.exibirModalPonto(vm.pontoSelecionado)">
 				<md-icon md-svg-icon="edit"></md-icon>
 				<md-tooltip>Editar</md-tooltip>
 			</md-button>
-			<md-button class="md-icon-button" ng-click="vm.exibirModalRemover(vm.pontoSelecionado[0])">
+			<md-button class="md-icon-button" ng-click="vm.exibirModalRemover(vm.pontoSelecionado)">
 				<md-icon md-svg-icon="delete"></md-icon>
 				<md-tooltip>Remover</md-tooltip>
 			</md-button>
@@ -18,17 +18,18 @@
 
 	<md-card-content loading="vm.carregando">
 		<md-table-container ng-show="vm.possuiRegistros()">
-			<table md-table md-row-select ng-model="vm.pontoSelecionado">
+			<table md-table md-row-select ng-model="vm.pontosSelecionados">
 				<thead md-head>
 					<tr md-row>
 						<th md-column>Dia</th>
 						<th md-column>Entrada / Saída</th>
 						<th md-column>Trabalhadas</th>
 						<th md-column>Extra / Faltantes</th>
+						<th md-column ng-if="vm.telaGrande()">Ações</th>
 					</tr>
 				</thead>
 				<tbody md-body>
-					<tr md-row md-select="ponto" md-select-id="ponto._id" md-auto-select ng-repeat="ponto in vm.pontos track by ponto._id">
+					<tr md-row md-auto-select md-on-select="vm.onPontoSelecionado" md-select="ponto" md-select-id="ponto._id" ng-repeat="ponto in vm.pontos track by ponto._id">
 						<td md-cell>
 							{{ ponto.data | date: 'dd' }}</span>
 						</td>
@@ -51,6 +52,16 @@
 							<span ng-if="ponto.horasFaltantes" class="hora-faltante">
 								<md-icon md-svg-icon="alarm-off" hide-print></md-icon>{{ ponto.formatados.horasFaltantes }}
 							</span>
+						</td>
+						<td md-cell ng-if="vm.telaGrande()">
+							<md-button class="md-icon-button" ng-click="vm.exibirModalPonto(ponto)">
+								<md-icon md-svg-icon="edit"></md-icon>
+								<md-tooltip>Editar</md-tooltip>
+							</md-button>
+							<md-button class="md-icon-button" ng-click="vm.exibirModalRemover(ponto)">
+								<md-icon md-svg-icon="delete"></md-icon>
+								<md-tooltip>Remover</md-tooltip>
+							</md-button>
 						</td>
 					</tr>
 				</tbody>

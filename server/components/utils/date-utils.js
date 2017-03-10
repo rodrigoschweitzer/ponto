@@ -24,8 +24,6 @@ exports.getHorasExtras = function(ponto, cargaHorariaEmMinutos) {
 };
 
 exports.getHorasFaltantes = function(ponto, cargaHorariaEmMinutos) {
-	if (!ponto.saida1 || !ponto.saida2) return 0;
-
 	var horasDia = this.getHorasTrabalhadas(ponto),
 		diferencaMinutos = horasDia - cargaHorariaEmMinutos;
 

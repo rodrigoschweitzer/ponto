@@ -14,7 +14,8 @@
 		vm.total = {};
 		vm.horasBanco = 0;
 		vm.carregando = false;
-		vm.pontoSelecionado = [];
+		vm.pontoSelecionado = null;
+		vm.pontosSelecionados = [];
 		vm.telaGrande = telaGrande;
 		vm.exibirModalPonto = exibirModalPonto;
 		vm.exibirModalRemover = exibirModalRemover;
@@ -22,6 +23,7 @@
 		vm.possuiRegistros = possuiRegistros;
 		vm.obterTotalHoras = obterTotalHoras;
 		vm.obterHorasBanco = obterHorasBanco;
+		vm.onPontoSelecionado = onPontoSelecionado;
 
 		activate();
 
@@ -73,7 +75,8 @@
 		}
 
 		function limparPontoSelecionado() {
-			vm.pontoSelecionado = [];
+			vm.pontoSelecionado = null;
+			vm.pontosSelecionados = [];
 		}
 
 		function listarPontos() {
@@ -98,6 +101,10 @@
 
 		function obterHorasBanco() {
 			return PontoService.obterHorasBanco().then(horasBanco => vm.horasBanco = horasBanco.horas);
+		}
+
+		function onPontoSelecionado(ponto) {
+			vm.pontoSelecionado = ponto;
 		}
 	}
 })();
