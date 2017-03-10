@@ -1,8 +1,6 @@
 <md-card>
-	<md-card-content loading="vm.carregando">
-
-		<form name="form" novalidate>
-
+	<form name="form" novalidate>
+		<md-card-content loading="vm.carregando">
 			<div class="md-headline">Preferências de Registro de Ponto</div>
 			
 			<md-input-container flex="25" flex-xs="50">
@@ -14,12 +12,10 @@
 					<div ng-message="pattern">Padrão inválido.</div>
 				</div>
 			</md-input-container>
-				
-			<div flex layout layout-align="end">
-				<md-button class="md-raised md-primary" ng-disabled="form.$invalid" ng-click="vm.salvar()">Salvar</md-button>
-			</div>
-		
-		</form>
+		</md-card-content>
 
-	</md-card-content>
+		<md-card-actions layout layout-align="end">
+			<md-button class="md-raised md-primary" ng-disabled="form.$invalid" ng-click="vm.salvar()">Salvar</md-button>
+		</md-card-actions>
+	</form>
 </md-card>
