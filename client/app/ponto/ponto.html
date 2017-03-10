@@ -25,7 +25,7 @@
 						<th md-column>Entrada / Saída</th>
 						<th md-column>Trabalhadas</th>
 						<th md-column>Extra / Faltantes</th>
-						<th md-column ng-if="vm.telaGrande()">Ações</th>
+						<th md-column ng-if="vm.telaGrande()" hide-print>Ações</th>
 					</tr>
 				</thead>
 				<tbody md-body>
@@ -53,7 +53,7 @@
 								<md-icon md-svg-icon="alarm-off" hide-print></md-icon>{{ ponto.formatados.horasFaltantes }}
 							</span>
 						</td>
-						<td md-cell ng-if="vm.telaGrande()">
+						<td md-cell ng-if="vm.telaGrande()" hide-print>
 							<md-button class="md-icon-button" ng-click="vm.exibirModalPonto(ponto)">
 								<md-icon md-svg-icon="edit"></md-icon>
 								<md-tooltip>Editar</md-tooltip>
