@@ -1,7 +1,5 @@
 'use strict';
 
-var minutosDiaTrabalhado = 8 * 60;
-
 exports.isDate = function(date) {
 	return Object.prototype.toString.call(date) === '[object Date]';
 };
@@ -13,23 +11,23 @@ exports.diferencaMinutosDatas = function(entrada, saida) {
 	return Math.abs((saida - entrada) / (60 * 1000));
 };
 
-exports.getHorasTrabalhadas = function(entrada1, saida1, entrada2, saida2) {
-	var periodo1 = this.diferencaMinutosDatas(entrada1, saida1),
-		periodo2 = this.diferencaMinutosDatas(entrada2, saida2);
+exports.getHorasTrabalhadas = function(ponto) {
+	var periodo1 = this.diferencaMinutosDatas(ponto.entrada1, ponto.saida1),
+		periodo2 = this.diferencaMinutosDatas(ponto.entrada2, ponto.saida2);
 	return periodo1 + periodo2;
 };
 
-exports.getHorasExtras = function(entrada1, saida1, entrada2, saida2) {
-	var horasDia = this.getHorasTrabalhadas(entrada1, saida1, entrada2, saida2),
-		diferencaMinutos = horasDia - minutosDiaTrabalhado;
+exports.getHorasExtras = function(ponto, cargaHorariaEmMinutos) {
+	var horasDia = this.getHorasTrabalhadas(ponto),
+		diferencaMinutos = horasDia - cargaHorariaEmMinutos;
 	return diferencaMinutos < 0 ? 0 : diferencaMinutos;
 };
 
-exports.getHorasFaltantes = function(entrada1, saida1, entrada2, saida2) {
-	if (!saida1 || !saida2) return 0;
+exports.getHorasFaltantes = function(ponto, cargaHorariaEmMinutos) {
+	if (!ponto.saida1 || !ponto.saida2) return 0;
 
-	var horasDia = this.getHorasTrabalhadas(entrada1, saida1, entrada2, saida2),
-		diferencaMinutos = horasDia - minutosDiaTrabalhado;
+	var horasDia = this.getHorasTrabalhadas(ponto),
+		diferencaMinutos = horasDia - cargaHorariaEmMinutos;
 
 	return diferencaMinutos > 0 ? 0 : Math.abs(diferencaMinutos);
 };

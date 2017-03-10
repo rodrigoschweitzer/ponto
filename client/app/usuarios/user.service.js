@@ -5,6 +5,9 @@ angular.module('app')
 		return $resource('/api/users/:id/:controller', {
 			id: '@_id'
 		}, {
+			update: {
+				method: 'PUT'
+			},
 			changePassword: {
 				method: 'PUT',
 				params: {

@@ -41,7 +41,8 @@
 			.icon('close', 'assets/images/icons/close-white.svg', 24)
 			.icon('exit-to-app', 'assets/images/icons/exit-to-app.svg', 24)
 			.icon('lock-outline', 'assets/images/icons/lock-outline.svg', 24)
-			.icon('people', 'assets/images/icons/people.svg', 24);
+			.icon('people', 'assets/images/icons/people.svg', 24)
+			.icon('settings', 'assets/images/icons/settings.svg', 24);
 	}
 
 	core.config(configure);

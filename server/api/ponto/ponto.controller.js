@@ -2,7 +2,8 @@
 
 var Ponto = require('./ponto.model'),
 	DateUtils = require('../../components/utils/date-utils'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	async = require('async');
 
 exports.banco = function(req, res) {
 	Ponto.aggregate([{
@@ -105,7 +106,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
 	var ponto = req.body;
 
-	_.merge(ponto, calcularMinutos(ponto), { user: req.user });
+	_.merge(ponto, calcularMinutos(ponto, req.user.workLoad), { user: req.user });
 
 	Ponto.create(ponto, function(err, ponto) {
 		if (err) { return handleError(res, err); }
@@ -128,13 +129,31 @@ exports.update = function(req, res) {
 		}, req.body);
 
 		var updated = _.merge(ponto, tmp);
-		_.merge(updated, calcularMinutos(updated));
+		_.merge(updated, calcularMinutos(updated, req.user.workLoad));
 
 		updated.save(function (err) {
 			if (err) { return handleError(res, err); }
 			return res.json(200, ponto);
 		});
 	});
+};
+
+exports.atualizarHoras = function (req, res, next) {
+	let user = req.user;
+
+	Ponto.find({ user: user._id })
+		.sort('-data')
+		.exec((err, pontos) => {
+			if (err) { return next(err) }
+
+			async.each(pontos, (ponto, callback) => {
+				_.merge(ponto, calcularMinutos(ponto, user.workLoad));
+				ponto.save(callback);
+			}, (err) => {
+				if (err) { return next(err); }
+				res.json(204);
+			});
+		});
 };
 
 // Deletes a ponto from the DB.
@@ -149,12 +168,22 @@ exports.destroy = function(req, res) {
 	});
 };
 
-function calcularMinutos(ponto) {
+function calcularMinutos(ponto, cargaHoraria) {
+	let cargaHorariaMinutos = converterCargaHorariaParaMinutos(cargaHoraria);
 	return {
-		horasTrabalhadas: DateUtils.getHorasTrabalhadas(ponto.entrada1, ponto.saida1, ponto.entrada2, ponto.saida2),
-		horasExtras: DateUtils.getHorasExtras(ponto.entrada1, ponto.saida1, ponto.entrada2, ponto.saida2),
-		horasFaltantes: DateUtils.getHorasFaltantes(ponto.entrada1, ponto.saida1, ponto.entrada2, ponto.saida2)
+		horasTrabalhadas: DateUtils.getHorasTrabalhadas(ponto),
+		horasExtras: DateUtils.getHorasExtras(ponto, cargaHorariaMinutos),
+		horasFaltantes: DateUtils.getHorasFaltantes(ponto, cargaHorariaMinutos)
 	};
+}
+
+function converterCargaHorariaParaMinutos(cargaHoraria) {
+	let cargaHorariaLimpa = cargaHoraria.replace(/[a-z]/ig, ''),
+		cargaHorariaSplit = cargaHorariaLimpa.split(' '),
+		horasEmMinutos = +cargaHorariaSplit[0] * 60,
+		minutos = cargaHorariaSplit.length > 1 ? +cargaHorariaSplit[1] : 0;
+
+	return horasEmMinutos + minutos;
 }
 
 function handleError(res, err) {

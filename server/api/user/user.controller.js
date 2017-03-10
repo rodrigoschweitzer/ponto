@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -33,6 +34,22 @@ exports.create = function (req, res, next) {
     res.json({ token: token });
   });
 };
+
+exports.update = function (req, res, next) {
+  var userReq = req.body;
+
+  User.findById(userReq._id, function (err, user) {
+    if (err) return next(err);
+    if (!user) return res.send(401);
+
+    var userUpdated = _.merge(user, userReq);
+
+    userUpdated.save(function (err) {
+			if (err) return next(err);
+			return res.json(201, userReq);
+		});
+  });
+}
 
 /**
  * Get a single user

@@ -12,6 +12,7 @@
 					id: '@_id'
 				}, {
 					update: { method: 'PUT' },
+					atualizarHoras: { method: 'PUT', params: { id: 'atualizar-horas' } },
 					totalHoras: { method: 'GET', params: { id: 'total' } },
 					horasBanco: { method: 'GET', params: { id: 'banco' } }
 				}
@@ -22,7 +23,8 @@
 				remover: remover,
 				listar: listar,
 				obterHorasBanco: obterHorasBanco,
-				obterTotalHoras: obterTotalHoras
+				obterTotalHoras: obterTotalHoras,
+				atualizarHoras: atualizarHoras
 			};
 
 		return service;
@@ -67,6 +69,10 @@
 
 		function obterHorasBanco() {
 			return PontoResource.horasBanco().$promise;
+		}
+
+		function atualizarHoras() {
+			return PontoResource.atualizarHoras().$promise;
 		}
 
 		function getResource(ponto) {

@@ -13,7 +13,12 @@ var UserSchema = new Schema({
   },
   hashedPassword: String,
   provider: String,
-  salt: String
+  salt: String,
+  workLoad: {
+    type: String,
+    trim: true,
+    default: '8h'
+  }
 });
 
 /**

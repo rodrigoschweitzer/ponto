@@ -18,6 +18,10 @@
 				<md-icon md-svg-icon="lock-outline"></md-icon>
 				<p>Alterar Senha</p>
 			</md-list-item>
+			<md-list-item ng-if="vm.isLoggedIn()" ng-class="{ 'active': vm.isActive('main.preferencias') }" ng-click="vm.goTo('main.preferencias')">
+				<md-icon md-svg-icon="settings"></md-icon>
+				<p>Preferências</p>
+			</md-list-item>
 			<md-divider ng-if="vm.isLoggedIn()"></md-divider>
 			<md-list-item ng-if="vm.isLoggedIn()" ng-click="vm.logout()">
 				<md-icon md-svg-icon="exit-to-app"></md-icon>
