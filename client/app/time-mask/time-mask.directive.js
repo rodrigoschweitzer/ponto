@@ -10,7 +10,7 @@ angular.module('app')
 			restrict: 'A',
 			require: 'ngModel',
 			link: function (scope, element, attrs, ctrls) {
-				var nonDigits = /\D/g,
+				let nonDigits = /\D/g,
 					ignoredKeys = [16, 17, 18, 20, 35, 36, 37, 38, 39, 40, 45],
 					mask = /^([0-1]\d|2[0-3]):[0-5]\d$/, //HH:mm
 					isNative = /(ip(a|o)d|iphone|android)/ig.test($window.navigator.userAgent);
@@ -32,7 +32,7 @@ angular.module('app')
 					if (!value) { return; }
 
 					// Remove todos os caracteres que não forem números
-					var time = value.replace(nonDigits, '');
+					let time = value.replace(nonDigits, '');
 
 					if (time.length > 2) {
 						time = time.substring(0, 2) + ':' + time.substring(2, 4);
@@ -53,7 +53,7 @@ angular.module('app')
 						return null;
 					}
 
-					var data = new Date();
+					let data = new Date();
 					data.setHours(value.substring(0, 2));
 					data.setMinutes(value.substring(3, 5));
 					data.setSeconds(0);

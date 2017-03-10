@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-	.config(function ($stateProvider) {
+	.config($stateProvider => {
 		$stateProvider
 			.state('main.pontos', {
 				url: '/pontos',

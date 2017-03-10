@@ -8,7 +8,7 @@
 	UsuariosController.$inject = ['$mdDialog', 'User'];
 
 	function UsuariosController($mdDialog, User) {
-		var vm = this;
+		let vm = this;
 		vm.usuarios = [];
 		vm.exibirConfirmacao = exibirConfirmacao;
 		vm.carregando = false;

@@ -8,7 +8,7 @@
 	PontoService.$inject = ['$resource', '$filter', 'DateService'];
 
 	function PontoService($resource, $filter, DateService) {
-		var PontoResource = $resource('/api/pontos/:id', {
+		let PontoResource = $resource('/api/pontos/:id', {
 					id: '@_id'
 				}, {
 					update: { method: 'PUT' },
@@ -46,7 +46,7 @@
 		}
 
 		function listar(mes) {
-			var inicio = angular.copy(mes),
+			let inicio = angular.copy(mes),
 				fim = angular.copy(mes);
 
 			return PontoResource.query({
@@ -58,7 +58,7 @@
 		}
 
 		function obterTotalHoras(mes) {
-			var inicio = angular.copy(mes),
+			let inicio = angular.copy(mes),
 				fim = angular.copy(mes);
 
 			return PontoResource.totalHoras({
@@ -76,12 +76,12 @@
 		}
 
 		function getResource(ponto) {
-			var pontoResource = _.merge(new PontoResource(), ponto);
+			let pontoResource = _.merge(new PontoResource(), ponto);
 			return pontoResource;
 		}
 
 		function formatarPontos(pontos) {
-			return pontos.map(function (ponto) {
+			return pontos.map(ponto => {
 				ponto.formatados = {};
 
 				if (ponto.data && !angular.isDate(ponto.data)) { ponto.data = new Date(ponto.data); }

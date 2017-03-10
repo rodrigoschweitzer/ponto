@@ -8,7 +8,7 @@
 	PontoController.$inject = ['$scope', '$mdDialog', '$mdMedia', 'PontoService', 'DateService'];
 
 	function PontoController($scope, $mdDialog, $mdMedia, PontoService, DateService) {
-		var vm = this;
+		let vm = this;
 		vm.mes = new Date();
 		vm.pontos = [];
 		vm.total = {};
@@ -33,7 +33,7 @@
 		}
 
 		function adicionarObservadores() {
-			$scope.$watch('vm.mes', function(newValue, oldValue) {
+			$scope.$watch('vm.mes', (newValue, oldValue) => {
 				if (newValue !== oldValue) {
 					listarPontos();
 				}
@@ -59,14 +59,15 @@
 		}
 
 		function exibirModalRemover(ponto) {
-			var dia = DateService.formatar(ponto.data, 'dd'),
-				confirmar = $mdDialog.confirm()
-							.title('Confirmar Exclusão')
-							.textContent(`Deseja realmente remover o registro do dia ${dia}?`)
-							.ok('Remover')
-							.cancel('Cancelar');
+			let dia = DateService.formatar(ponto.data, 'dd');
 
-			$mdDialog.show(confirmar).then(() => remover(ponto));
+			$mdDialog.show(
+				$mdDialog.confirm()
+					.title('Confirmar Exclusão')
+					.textContent(`Deseja realmente remover o registro do dia ${dia}?`)
+					.ok('Remover')
+					.cancel('Cancelar')
+			).then(() => remover(ponto));
 		}
 
 		function remover(ponto) {
@@ -95,7 +96,7 @@
 		}
 
 		function obterTotalHoras() {
-			var mes = angular.copy(vm.mes);
+			let mes = angular.copy(vm.mes);
 			return PontoService.obterTotalHoras(mes).then(total => vm.total = total);
 		}
 

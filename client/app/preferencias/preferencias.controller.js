@@ -8,7 +8,7 @@
 	PreferenciasController.$inject = ['$mdDialog', '$mdToast','Auth', 'User', 'PontoService'];
 
 	function PreferenciasController($mdDialog, $mdToast, Auth, User, PontoService) {
-		var vm = this;
+		let vm = this;
 		vm.carregando = false;
 		vm.cargaHoraria = '';
 		vm.cargaHoariaPattern = /^([0-2][0-3]|\d{1})h\s?(([0-5]\d|\d{1})m)?$/ig; //Padrão: 23h 59m

@@ -8,7 +8,7 @@
 	PontoFormController.$inject = ['$mdDialog', 'PontoService', 'ponto'];
 
 	function PontoFormController($mdDialog, PontoService, ponto) {
-		var vm = this;
+		let vm = this;
 		vm.carregando = false;
 		vm.hoje = new Date();
 		vm.ponto = ponto || { data: vm.hoje };
@@ -38,7 +38,7 @@
 		function ajustarData(registro) {
 			if (!registro) { return; }
 
-			var data = vm.ponto.data;
+			let data = vm.ponto.data;
 			registro.setDate(data.getDate());
 			registro.setMonth(data.getMonth());
 			registro.setFullYear(data.getFullYear());
