@@ -11,7 +11,8 @@
 		var directive = {
 			restrict: 'A',
 			scope: {
-				loading: '='
+				loading: '=',
+				loadingMessage: '@'
 			},
 			link: linkFunc
 		};
@@ -23,6 +24,8 @@
 				$backdrop,
 				$container,
 				$body = $('body');
+
+			scope.loadingMessage = scope.loadingMessage ? scope.loadingMessage : 'Carregando...';
 
 			scope.$on('$destroy', function () {
 				loadingWatchInstance();
@@ -45,16 +48,16 @@
 			}
 
 			function getTemplate() {
-				return [
-					'<div class="loading-backdrop"></div>',
-					'<div class="loading-container" layout layout-align="center center">',
-					'	<md-card class="loading-card">',
-					'		<md-card-content>',
-					'			<md-progress-circular md-mode="indeterminate"></md-progress-circular>',
-					'		</md-card-content>',
-					'	</md-card>',
-					'</div>'
-				].join('');
+				return `
+					<div class="loading-backdrop"></div>
+					<div class="loading-container" layout layout-align="center center">
+						<md-card class="loading-card">
+							<md-card-content layout layout-align="center center">
+								<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+								{{ loadingMessage }}
+							</md-card-content>
+						</md-card>
+					</div>`;
 			}
 
 			function observeLoading(value) {

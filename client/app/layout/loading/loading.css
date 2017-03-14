@@ -17,3 +17,7 @@
 	right: 0;
 	z-index: 101;
 }
+
+.loading-container md-progress-circular {
+	margin-right: 10px;
+}

@@ -52,7 +52,7 @@
 	function configure($urlRouterProvider, $locationProvider, $httpProvider) {
 		$urlRouterProvider.otherwise('/login');
 		$locationProvider.html5Mode(true);
-		$httpProvider.interceptors.push('authInterceptor');
+		$httpProvider.interceptors.push('AuthInterceptor');
 	}
 
 })();
