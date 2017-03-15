@@ -53,7 +53,9 @@
 					ponto: ponto
 				},
 				clickOutsideToClose: false,
-				fullscreen: true
+				fullscreen: true,
+				focusOnOpen: false,
+				onComplete: (scope, el) => el.find('input[name=entrada1]').focus()
 			})
 			.then(() => listarPontos());
 		}
