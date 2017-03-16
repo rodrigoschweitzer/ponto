@@ -55,7 +55,7 @@
 				clickOutsideToClose: false,
 				fullscreen: true,
 				focusOnOpen: false,
-				onComplete: (scope, el) => el.find('input[name=entrada1]').focus()
+				onComplete: (scope, el) => el.find('input.ng-empty:first').focus()
 			})
 			.then(() => listarPontos());
 		}
